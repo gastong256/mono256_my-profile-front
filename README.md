@@ -1,2 +1,182 @@
 # mono256_my-profile-front
-My profile web.
+
+Frontend application for **mono256_my-profile**. This repository delivers a production-ready personal professional website built with a static-first architecture, and it establishes the foundation for a future developer-facing generator product.
+
+## 1. Project Overview
+
+`mono256_my-profile-front` is a Next.js 14 frontend designed to:
+
+- Present a professional personal website.
+- Communicate the future product direction.
+- Provide a stable base for evolving into a generator platform.
+
+Core product promise:
+
+> Meet me and generate your personal website in two clicks.
+
+Two clicks means:
+
+1. Connect GitHub.
+2. Connect Vercel.
+
+## 2. Purpose Of This Repository
+
+This repository is the frontend entrypoint of the broader `mono256_my-profile` project.
+
+It currently serves:
+
+- Marketing and professional profile pages (Home, About, Projects, Contact, Product).
+- A product boundary for future generated flows (`/create`, `/result/[id]`).
+- Baseline operational readiness through linting, type-checking, and CI.
+
+## 3. Architecture Explanation
+
+The project follows these principles:
+
+- Static-first rendering for fast performance and lower operational complexity.
+- Clear separation between current marketing experience and future product workflows.
+- Typed content files to avoid long hardcoded page copy.
+- Lean dependency strategy with minimal libraries.
+- Production-ready, scalable folder organization.
+
+### Route Segmentation
+
+- `(marketing)` group: public profile and product-marketing pages.
+- `(product)` group: future generator flow routes.
+- `api/health`: backend health placeholder endpoint.
+
+## 4. Folder Structure Explanation
+
+```text
+mono256_my-profile-front/
+  .github/
+    workflows/
+      ci.yml
+
+  public/
+    images/
+      profile/
+      projects/
+      og/
+    icons/
+    favicon.ico
+
+  src/
+    app/
+      (marketing)/
+        page.tsx
+        about/page.tsx
+        projects/page.tsx
+        contact/page.tsx
+        product/page.tsx
+      (product)/
+        create/page.tsx
+        result/[id]/page.tsx
+      api/
+        health/route.ts
+      layout.tsx
+      not-found.tsx
+      sitemap.ts
+      robots.ts
+      globals.css
+
+    components/
+      layout/
+      marketing/
+      pages/
+      ui/
+      shared/
+
+    content/
+      site.ts
+      profile.ts
+      projects.ts
+      product.ts
+
+    lib/
+      env.ts
+      metadata.ts
+      api/client.ts
+      utils/cn.ts
+
+    styles/
+      tokens.css
+
+    types/
+      content.ts
+      api.ts
+
+  .env.example
+  package.json
+  next.config.mjs
+  tailwind.config.ts
+  postcss.config.js
+  tsconfig.json
+  README.md
+```
+
+## 5. Local Development Instructions
+
+### Prerequisites
+
+- Node.js 20+ (LTS recommended)
+- `pnpm` 10+
+
+### Setup
+
+```bash
+pnpm install
+cp .env.example .env.local
+pnpm dev
+```
+
+Application runs at:
+
+- `http://localhost:3000`
+
+### Quality Checks
+
+```bash
+pnpm lint
+pnpm typecheck
+pnpm build
+```
+
+## 6. Deployment Notes (Vercel)
+
+This project is optimized for Vercel deployment:
+
+1. Import repository into Vercel.
+2. Set required environment variables.
+3. Deploy the default branch.
+
+No custom server is required for current scope.
+
+## 7. Environment Variables
+
+Defined in `.env.example`:
+
+- `NEXT_PUBLIC_SITE_URL` (example: `http://localhost:3000`)
+- `NEXT_PUBLIC_API_URL` (example: `http://localhost:4000`)
+
+These are used for metadata, sitemap/robots generation, and API client placeholders.
+
+## 8. Future Roadmap Summary
+
+Planned evolution from profile website to productized generator:
+
+1. Implement authentication and OAuth connections (GitHub, Vercel).
+2. Build repository/profile ingestion pipeline.
+3. Generate site configurations and themed templates.
+4. Automate preview + production deployments.
+5. Add dashboard-level management for generated websites.
+
+## 9. Main Project Concept Link
+
+Main concept repository: [mono256_my-profile](https://github.com/mono256/mono256_my-profile)
+
+Project direction statement:
+
+- Personal website first.
+- Product generator second.
+- Fast website creation for developers with two-click onboarding.

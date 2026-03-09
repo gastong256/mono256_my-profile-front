@@ -4,22 +4,17 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { productContent } from "@/content/product";
+import { WindowPageShell } from "@/components/layout/window-page-shell";
 import { Button } from "@/components/ui/button";
-import { WindowFrame } from "@/components/ui/window-frame";
-
-import { PageContainer } from "@/components/layout/page-container";
 
 export function ProductPage() {
   const router = useRouter();
   const [agreed, setAgreed] = useState(false);
 
   return (
-    <PageContainer className="flex h-full min-h-0 flex-col py-1 md:py-2">
-      <WindowFrame
+    <WindowPageShell
         title="BuildYours.exe"
         subtitle="Overview"
-        size="fixed"
-        className="w-full"
         status="interactive"
         help={{
           section: "Product Overview",
@@ -82,7 +77,6 @@ export function ProductPage() {
             </div>
           </div>
         </div>
-      </WindowFrame>
-    </PageContainer>
+      </WindowPageShell>
   );
 }

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 
+import { navItemActiveClass, navItemClass } from "@/components/ui/foundation";
 import { profileContent } from "@/content/profile";
 import { cn } from "@/lib/utils/cn";
 
@@ -61,9 +62,9 @@ export function SiteHeader() {
   const activeView = getActiveView(pathname);
 
   return (
-    <header className="sticky top-0 z-50 shrink-0 bg-background/45 backdrop-blur-md">
+    <header className="sticky top-0 z-50 shrink-0 bg-background/55 backdrop-blur-md">
       <div className="w-full pt-2 md:pt-3">
-        <div className="mx-auto w-[92vw] rounded-2xl border border-white/10 bg-[linear-gradient(180deg,rgba(20,24,36,0.8),rgba(12,14,22,0.72))] shadow-card md:w-[80vw]">
+        <div className="mx-auto w-[92vw] rounded-2xl border border-interactive-border/80 bg-[linear-gradient(180deg,rgba(16,24,42,0.86),rgba(10,16,30,0.78))] shadow-card md:w-[80vw]">
           <div className="grid items-center gap-1.5 px-4 py-1.5 md:grid-cols-[1fr_auto_1fr] md:gap-2 md:px-6 md:py-2">
             <Link href="/" title="Gastón Germán Gonzalez | Software Engineer" className="group flex min-w-0 items-center gap-3 md:gap-3.5">
               <BrandIcon />
@@ -100,14 +101,26 @@ export function SiteHeader() {
             <ul className="mx-auto grid max-w-[740px] grid-cols-2 gap-x-4 gap-y-3 sm:flex sm:max-w-none sm:flex-wrap sm:justify-center sm:gap-4 md:gap-5">
               {shortcuts.map((shortcut) => (
                 <li key={shortcut.view} className="flex justify-center">
-                  <Link href={shortcut.href} className="group flex w-28 flex-col items-center gap-1 text-center sm:w-[118px]">
+                  <Link
+                    href={shortcut.href}
+                    className={cn(
+                      "group flex w-28 flex-col items-center gap-1 text-center",
+                      navItemClass,
+                      activeView === shortcut.view ? navItemActiveClass : undefined,
+                      "sm:w-[118px]"
+                    )}
+                  >
                     <span className="grid h-10 w-10 place-items-center transition-transform duration-150 group-hover:-translate-y-0.5 md:h-11 md:w-11">
                       <ShortcutIcon view={shortcut.view} active={activeView === shortcut.view} />
                     </span>
                     <span
                       className={cn(
                         "text-sm transition-colors",
-                        activeView === shortcut.view ? "text-brand" : "text-foreground/88 group-hover:text-foreground"
+                        activeView === shortcut.view
+                          ? "text-brand"
+                          : shortcut.view === "build"
+                            ? "text-[#b7af9c] group-hover:text-[#cec2a7]"
+                            : "text-foreground/88 group-hover:text-foreground"
                       )}
                     >
                       {shortcut.label}
@@ -215,7 +228,7 @@ function OnlineStatusIcon() {
 }
 
 function ShortcutIcon({ view, active }: { view: HeaderView; active: boolean }) {
-  const iconClass = cn("h-8 w-8 transition-colors md:h-9 md:w-9", active ? "text-brand" : "text-[#d7dae4]");
+  const iconClass = cn("h-8 w-8 transition-colors md:h-9 md:w-9", active ? "text-primary" : "text-[#d7dae4]");
 
   if (view === "projects") {
     return (
@@ -238,8 +251,15 @@ function ShortcutIcon({ view, active }: { view: HeaderView; active: boolean }) {
   }
 
   if (view === "build") {
+    const buildIconClass = cn(
+      "h-8 w-8 transition-colors md:h-9 md:w-9",
+      active
+        ? "text-primary drop-shadow-[0_0_10px_rgba(59,130,246,0.24)]"
+        : "text-[#EBCB8B] drop-shadow-[0_0_9px_rgba(235,203,139,0.28)] group-hover:text-[#f2d9a4]"
+    );
+
     return (
-      <svg viewBox="0 0 512 512" className={iconClass} aria-hidden>
+      <svg viewBox="0 0 512 512" className={buildIconClass} aria-hidden>
         <g fill="currentColor">
           <path d="M127.083,247.824l50.031-76.906c0,0-74.734-29.688-109.547-3.078C32.755,194.465,0.005,268.184,0.005,268.184 l37.109,21.516C37.114,289.699,84.083,198.684,127.083,247.824z" />
           <path d="M264.177,384.918l76.906-50.031c0,0,29.688,74.734,3.078,109.547 c-26.625,34.797-100.344,67.563-100.344,67.563l-21.5-37.109C222.317,474.887,313.333,427.918,264.177,384.918z" />

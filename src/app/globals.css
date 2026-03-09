@@ -17,9 +17,9 @@
   body {
     position: relative;
     background-image:
-      radial-gradient(circle at 50% 12%, rgba(255, 255, 255, 0.045), transparent 24%),
-      radial-gradient(circle at 50% 62%, rgba(217, 139, 61, 0.06), transparent 30%),
-      linear-gradient(180deg, #0d1120 0%, #090b11 100%);
+      radial-gradient(circle at 50% 12%, rgba(173, 209, 255, 0.08), transparent 24%),
+      radial-gradient(circle at 52% 64%, rgba(68, 148, 255, 0.11), transparent 31%),
+      linear-gradient(180deg, #0b1424 0%, #070d18 100%);
     background-size: auto, auto, auto;
     background-attachment: fixed;
   }
@@ -34,10 +34,10 @@
 
   body::before {
     background:
-      linear-gradient(135deg, transparent 0 8%, rgba(255, 255, 255, 0.02) 8.2% 8.45%, transparent 8.7% 100%),
-      linear-gradient(315deg, transparent 0 11%, rgba(217, 139, 61, 0.12) 11.15% 11.35%, transparent 11.55% 100%),
-      linear-gradient(225deg, transparent 0 87%, rgba(255, 255, 255, 0.02) 87.15% 87.35%, transparent 87.55% 100%);
-    opacity: 0.45;
+      linear-gradient(135deg, transparent 0 8%, rgba(255, 255, 255, 0.018) 8.2% 8.45%, transparent 8.7% 100%),
+      linear-gradient(315deg, transparent 0 11%, rgba(74, 146, 255, 0.14) 11.15% 11.35%, transparent 11.55% 100%),
+      linear-gradient(225deg, transparent 0 87%, rgba(255, 255, 255, 0.018) 87.15% 87.35%, transparent 87.55% 100%);
+    opacity: 0.42;
   }
 
   body::after {
@@ -52,7 +52,12 @@
   }
 
   a:hover {
-    @apply text-brand/80;
+    @apply text-brand-hover;
+  }
+
+  ::selection {
+    background: hsl(var(--color-selected) / 0.85);
+    color: hsl(var(--color-fg) / 1);
   }
 }
 
@@ -68,6 +73,31 @@
 }
 
 @layer utilities {
+  .ui-focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus/70;
+  }
+
+  .ui-nav-item {
+    @apply rounded-lg px-1.5 py-1 transition-colors hover:bg-nav-hover/70;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus/70;
+  }
+
+  .ui-nav-item-active {
+    @apply bg-nav-active/55;
+  }
+
+  .ui-interactive-control {
+    @apply border border-border-interactive bg-interactive-subtle text-foreground;
+  }
+
+  .ui-panel {
+    @apply rounded-lg border border-border/80 bg-surface;
+  }
+
+  .ui-panel-elevated {
+    @apply rounded-lg border border-border-interactive/80 bg-surface-elevated shadow-card;
+  }
+
   .cursor-blink {
     animation: cursor-blink 1s steps(1, end) infinite;
   }

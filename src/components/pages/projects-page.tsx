@@ -2,10 +2,8 @@ import Link from "next/link";
 
 import { projectsContent } from "@/content/projects";
 import type { ProjectItem } from "@/types/content";
+import { WindowPageShell } from "@/components/layout/window-page-shell";
 import { Badge } from "@/components/ui/badge";
-import { WindowFrame } from "@/components/ui/window-frame";
-
-import { PageContainer } from "@/components/layout/page-container";
 
 type ProjectsPageProps = {
   selectedSlug?: string;
@@ -22,12 +20,9 @@ export function ProjectsPage({ selectedSlug }: ProjectsPageProps) {
   const overviewPath = selectedProject ? `~/Projects/${selectedProject.slug}/` : "~/Projects/";
 
   return (
-    <PageContainer className="flex h-full min-h-0 flex-col py-1 md:py-2">
-      <WindowFrame
+    <WindowPageShell
         title="Projects/"
-        size="fixed"
-        className="w-full"
-        bodyClassName="!p-0 md:!p-0 flex min-h-0 flex-1 flex-col !overflow-hidden"
+        windowBodyClassName="!p-0 md:!p-0 flex min-h-0 flex-1 flex-col !overflow-hidden"
         status="external-links"
         help={{
           section: "Projects",
@@ -52,8 +47,7 @@ export function ProjectsPage({ selectedSlug }: ProjectsPageProps) {
               : `${projectsContent.length} folders · ${featuredCount} featured · ${techTagsCount} tech tags`}
           </p>
         </div>
-      </WindowFrame>
-    </PageContainer>
+      </WindowPageShell>
   );
 }
 

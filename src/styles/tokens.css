@@ -2,13 +2,40 @@
   --font-sans: "Avenir Next", "Segoe UI", "Trebuchet MS", "Verdana", sans-serif;
   --font-mono: "IBM Plex Mono", "Menlo", "Monaco", "Consolas", monospace;
 
-  --color-bg: 231 22% 12%;
-  --color-fg: 220 18% 92%;
-  --color-brand: 22 88% 55%;
-  --color-brand-foreground: 0 0% 100%;
-  --color-surface: 232 18% 17%;
-  --color-border: 233 14% 27%;
-  --color-muted: 226 12% 65%;
+  --color-bg: 221 28% 10%;
+  --color-fg: 215 23% 92%;
+  --color-surface: 222 23% 15%;
+  --color-surface-elevated: 221 24% 18%;
+  --color-surface-selected: 213 46% 28%;
+  --color-border: 218 22% 28%;
+  --color-muted: 217 12% 66%;
+  --color-text-primary: 215 23% 92%;
+  --color-text-secondary: 217 12% 72%;
+
+  --color-primary: 211 90% 56%;
+  --color-primary-hover: 212 88% 50%;
+  --color-primary-active: 213 84% 44%;
+  --color-primary-foreground: 210 40% 98%;
+
+  --color-accent: 198 78% 68%;
+  --color-accent-subtle: 209 60% 22%;
+  --color-accent-hover: 198 72% 62%;
+  --color-focus-ring: 211 92% 62%;
+  --color-selected: 213 46% 28%;
+
+  --color-interactive-border: 217 27% 34%;
+  --color-interactive-subtle: 215 26% 19%;
+  --color-nav-hover-bg: 214 31% 20%;
+  --color-nav-active-bg: 213 46% 28%;
+
+  --color-cta-bg: 211 90% 56%;
+  --color-cta-foreground: 210 40% 98%;
+
+  --color-success: 146 42% 55%;
+  --color-success-subtle: 146 40% 22%;
+
+  --color-brand: 211 90% 56%;
+  --color-brand-foreground: 210 40% 98%;
 
   --radius-lg: 0.875rem;
   --radius-md: 0.625rem;

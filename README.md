@@ -39,6 +39,12 @@ The project follows these principles:
 - Lean dependency strategy with minimal libraries.
 - Production-ready, scalable folder organization.
 
+### Global Style System
+
+The shared layout layer uses a token-based dark theme with a Fedora-inspired blue accent direction (cool primary tones, subtle slate surfaces, and blue-focused interaction states).  
+Core tokens are defined in `src/styles/tokens.css` and mapped through `tailwind.config.ts`.  
+Reusable interaction classes for shared UI primitives live in `src/components/ui/foundation.ts` and are consumed by base components (`button`, `input`, `textarea`, `badge`, and shared layout interactions).
+
 ### Route Segmentation
 
 - `(marketing)` group: public profile and product-marketing pages.

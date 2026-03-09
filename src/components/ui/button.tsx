@@ -1,6 +1,7 @@
 import type { ButtonHTMLAttributes } from "react";
 
 import { cn } from "@/lib/utils/cn";
+import { focusVisibleRingClass, interactiveStateClass } from "@/components/ui/foundation";
 
 type ButtonVariant = "primary" | "secondary" | "ghost";
 type ButtonSize = "sm" | "md" | "lg";
@@ -18,12 +19,12 @@ export function buttonVariants({
   size?: ButtonSize;
 } = {}) {
   const base =
-    "inline-flex items-center justify-center rounded-md border font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/40 disabled:pointer-events-none disabled:opacity-50";
+    cn("inline-flex items-center justify-center rounded-md border font-medium", interactiveStateClass, focusVisibleRingClass);
 
   const variantClass: Record<ButtonVariant, string> = {
-    primary: "border-brand bg-brand text-brand-foreground hover:bg-brand/90",
-    secondary: "border-border bg-surface text-foreground hover:bg-background/80",
-    ghost: "border-transparent text-foreground hover:border-border hover:bg-background/70"
+    primary: "border-primary bg-cta text-cta-foreground hover:bg-primary-hover active:bg-primary-active",
+    secondary: "border-interactive-border bg-interactive-subtle text-foreground hover:bg-nav-hover active:bg-nav-active",
+    ghost: "border-transparent text-foreground hover:border-interactive-border hover:bg-nav-hover active:bg-nav-active"
   };
 
   const sizeClass: Record<ButtonSize, string> = {

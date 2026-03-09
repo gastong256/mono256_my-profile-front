@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-import { PageContainer } from "@/components/layout/page-container";
+import { WindowPageShell } from "@/components/layout/window-page-shell";
 import { buttonVariants } from "@/components/ui/button";
-import { WindowFrame } from "@/components/ui/window-frame";
 import { productContent } from "@/content/product";
 import { createPageMetadata } from "@/lib/metadata";
 
@@ -21,12 +20,9 @@ type ResultPageProps = {
 
 export default function ResultPage({ params }: ResultPageProps) {
   return (
-    <PageContainer className="flex h-full min-h-0 flex-col py-1 md:py-2">
-      <WindowFrame
+    <WindowPageShell
         title="BuildYours.exe"
         subtitle="Summary"
-        size="fixed"
-        className="w-full"
         status="external-links"
         help={{
           section: "Result",
@@ -102,7 +98,6 @@ export default function ResultPage({ params }: ResultPageProps) {
             </div>
           </div>
         </div>
-      </WindowFrame>
-    </PageContainer>
+      </WindowPageShell>
   );
 }

@@ -1,9 +1,7 @@
 import Image from "next/image";
 
 import { profileContent } from "@/content/profile";
-import { WindowFrame } from "@/components/ui/window-frame";
-
-import { PageContainer } from "@/components/layout/page-container";
+import { WindowPageShell } from "@/components/layout/window-page-shell";
 
 export function AboutPage() {
   const { aboutDocument } = profileContent;
@@ -42,12 +40,9 @@ export function AboutPage() {
   const readingTimeMinutes = Math.max(1, Math.ceil(wordCount / 200));
 
   return (
-    <PageContainer className="flex h-full min-h-0 flex-col py-1 md:py-2">
-      <WindowFrame
+    <WindowPageShell
         title="Profile.md"
-        size="fixed"
-        className="w-full"
-        bodyClassName="!p-0 md:!p-0 flex min-h-0 flex-1 flex-col !overflow-hidden"
+        windowBodyClassName="!p-0 md:!p-0 flex min-h-0 flex-1 flex-col !overflow-hidden"
         status="read-only"
         help={{
           section: "About",
@@ -138,7 +133,6 @@ export function AboutPage() {
             </p>
           </div>
         </article>
-      </WindowFrame>
-    </PageContainer>
+      </WindowPageShell>
   );
 }

@@ -5,10 +5,9 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 import { productContent } from "@/content/product";
+import { WindowPageShell } from "@/components/layout/window-page-shell";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { WindowFrame } from "@/components/ui/window-frame";
-
-import { PageContainer } from "@/components/layout/page-container";
+import { statusPillClassName } from "@/components/ui/status-pill";
 
 const templateOptions = [
   {
@@ -38,13 +37,10 @@ export function CreatePageContent() {
   const activeTemplate = templateOptions.find((option) => option.id === selectedTemplate) ?? null;
 
   return (
-    <PageContainer className="flex h-full min-h-0 flex-col py-1 md:py-2">
-      <WindowFrame
+    <WindowPageShell
         title="BuildYours.exe"
         subtitle="Setup"
-        size="fixed"
-        className="w-full"
-        bodyClassName="p-4 md:p-4"
+        windowBodyClassName="p-4 md:p-4"
         status="interactive"
         help={{
           section: "Create",
@@ -101,8 +97,7 @@ export function CreatePageContent() {
             </div>
           </div>
         </div>
-      </WindowFrame>
-    </PageContainer>
+      </WindowPageShell>
   );
 }
 
@@ -127,8 +122,8 @@ function ProviderCard({
         <span
           className={
             connected
-              ? "inline-flex rounded-full border border-[#4fa770]/40 bg-[#4fa770]/15 px-2 py-0.5 text-[10px] font-mono uppercase tracking-wide text-[#8ce5ad]"
-              : "inline-flex rounded-full border border-foreground/20 bg-foreground/10 px-2 py-0.5 text-[10px] font-mono uppercase tracking-wide text-foreground/70"
+              ? statusPillClassName("inline-flex rounded-full border px-2 py-0.5 text-[10px] font-mono uppercase tracking-wide", "success")
+              : statusPillClassName("inline-flex rounded-full border px-2 py-0.5 text-[10px] font-mono uppercase tracking-wide", "neutral")
           }
         >
           {connected ? "connected" : "pending"}
@@ -163,8 +158,8 @@ function TemplateSelector({
         <span
           className={
             selectedTemplate
-              ? "inline-flex rounded-full border border-[#4fa770]/40 bg-[#4fa770]/15 px-2 py-0.5 text-[10px] font-mono uppercase tracking-wide text-[#8ce5ad]"
-              : "inline-flex rounded-full border border-foreground/20 bg-foreground/10 px-2 py-0.5 text-[10px] font-mono uppercase tracking-wide text-foreground/70"
+              ? statusPillClassName("inline-flex rounded-full border px-2 py-0.5 text-[10px] font-mono uppercase tracking-wide", "success")
+              : statusPillClassName("inline-flex rounded-full border px-2 py-0.5 text-[10px] font-mono uppercase tracking-wide", "neutral")
           }
         >
           {selectedTemplate ? "selected" : "required"}

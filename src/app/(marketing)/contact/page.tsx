@@ -5,7 +5,7 @@ import { createPageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Contact",
-  description: "Contact mono256 for collaboration, consulting, and product opportunities.",
+  description: "Contact Gaston Gonzalez for backend, architecture, and product engineering consulting.",
   path: "/contact"
 });
 

@@ -23,18 +23,38 @@ export type ProfileHighlight = {
   description: string;
 };
 
+export type AboutDocument = {
+  fileName: string;
+  language: string;
+  lastUpdated: string;
+  title: string;
+  profileRole: string;
+  experienceSnapshot: {
+    title: string;
+    lead: string;
+    detail: string;
+  };
+  intro: string[];
+  focusAreas: string[];
+  principles: string[];
+};
+
 export type ProfileContent = {
   fullName: string;
   role: string;
   location: string;
   summary: string;
   highlights: ProfileHighlight[];
+  aboutDocument: AboutDocument;
 };
 
 export type ProjectItem = {
   slug: string;
   name: string;
   summary: string;
+  overview: string;
+  highlights: string[];
+  lastUpdated: string;
   tech: string[];
   repositoryUrl: string;
   demoUrl?: string;
@@ -46,9 +66,26 @@ export type ProductStep = {
   description: string;
 };
 
+export type ProductDocLink = {
+  label: string;
+  href: string;
+};
+
 export type ProductContent = {
   headline: string;
   description: string;
   promise: string;
   steps: ProductStep[];
+  agreementLabel: string;
+  installTitle: string;
+  installDescription: string;
+  resultTitle: string;
+  resultDescription: string;
+  deliverables: {
+    websiteLabel: string;
+    websiteUrl: string;
+    repositoryLabel: string;
+    repositoryUrl: string;
+  };
+  docs: ProductDocLink[];
 };

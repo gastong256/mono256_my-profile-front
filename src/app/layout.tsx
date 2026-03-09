@@ -14,10 +14,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="font-sans antialiased">
+    <html lang="en" className="h-full">
+      <body className="flex h-full flex-col overflow-hidden font-sans antialiased">
         <SiteHeader />
-        <main>{children}</main>
+        <main className="min-h-0 flex-1 overflow-hidden">{children}</main>
         <SiteFooter />
       </body>
     </html>

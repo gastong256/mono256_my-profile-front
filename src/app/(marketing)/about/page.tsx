@@ -5,7 +5,7 @@ import { createPageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = createPageMetadata({
   title: "About",
-  description: "Professional profile, engineering focus, and delivery highlights.",
+  description: "Senior Software Engineer profile: backend systems, architecture mindset, DevOps culture, and pragmatic execution.",
   path: "/about"
 });
 

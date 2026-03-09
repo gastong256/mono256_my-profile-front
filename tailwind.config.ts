@@ -21,7 +21,7 @@ const config: Config = {
         sm: "var(--radius-sm)"
       },
       boxShadow: {
-        card: "0 8px 30px rgba(10, 17, 40, 0.08)"
+        card: "0 14px 35px rgba(0, 0, 0, 0.35)"
       },
       fontFamily: {
         sans: ["var(--font-sans)", "ui-sans-serif", "system-ui"],

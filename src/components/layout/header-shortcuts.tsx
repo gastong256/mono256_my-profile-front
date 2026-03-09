@@ -27,29 +27,29 @@ export function HeaderShortcuts() {
 
   return (
     <nav aria-label="Desktop shortcuts" className="w-full">
-      <ul className="mx-auto grid max-w-[740px] grid-cols-2 gap-x-4 gap-y-3 sm:flex sm:max-w-none sm:flex-wrap sm:justify-center sm:gap-4 md:gap-5">
+      <ul className="mx-auto grid max-w-[680px] grid-cols-2 gap-x-3 gap-y-2 sm:flex sm:max-w-none sm:flex-wrap sm:justify-center sm:gap-4 md:gap-5">
         {shortcuts.map((shortcut) => (
           <li key={shortcut.view} className="flex justify-center">
             <Link
               href={shortcut.href}
               className={cn(
-                "group flex w-28 flex-col items-center gap-1 text-center",
+                "group flex w-[104px] flex-col items-center gap-0.5 text-center sm:w-28 sm:gap-1",
                 navItemClass,
                 activeView === shortcut.view ? navItemActiveClass : undefined,
                 "sm:w-[118px]"
               )}
             >
-              <span className="grid h-10 w-10 place-items-center transition-transform duration-150 group-hover:-translate-y-0.5 md:h-11 md:w-11">
+              <span className="grid h-8 w-8 place-items-center transition-transform duration-150 group-hover:-translate-y-0.5 sm:h-10 sm:w-10 md:h-11 md:w-11">
                 <ShortcutIcon view={shortcut.view} active={activeView === shortcut.view} />
               </span>
               <span
                 className={cn(
-                  "text-sm transition-colors",
+                  "text-xs transition-colors sm:text-sm",
                   activeView === shortcut.view
                     ? "text-brand"
                     : shortcut.view === "build"
-                      ? "text-[#b7af9c] group-hover:text-[#cec2a7]"
-                      : "text-foreground/88 group-hover:text-foreground"
+                      ? "text-[#a89f8b] group-hover:text-[#cec2a7]"
+                      : "text-foreground/66 group-hover:text-foreground/88"
                 )}
               >
                 {shortcut.label}
@@ -83,7 +83,7 @@ function getActiveView(pathname: string): HeaderView | null {
 }
 
 function ShortcutIcon({ view, active }: { view: HeaderView; active: boolean }) {
-  const iconClass = cn("h-8 w-8 transition-colors md:h-9 md:w-9", active ? "text-primary" : "text-[#d7dae4]");
+  const iconClass = cn("h-7 w-7 transition-colors sm:h-8 sm:w-8 md:h-9 md:w-9", active ? "text-primary" : "text-[#b8c0cc]");
 
   if (view === "projects") {
     return (
@@ -96,7 +96,7 @@ function ShortcutIcon({ view, active }: { view: HeaderView; active: boolean }) {
 
   if (view === "contact") {
     return (
-      <svg viewBox="0 0 24 24" className={`${iconClass} h-6 w-6 md:h-[26px] md:w-[26px]`} fill="currentColor" aria-hidden>
+      <svg viewBox="0 0 24 24" className={`${iconClass} h-[21px] w-[21px] sm:h-6 sm:w-6 md:h-[26px] md:w-[26px]`} fill="currentColor" aria-hidden>
         <path d="M4,24v-5H0V0h23v19h-9.3L4,24z M2,17h4v3.7l7.3-3.7H21V2H2V17z" />
         <rect x="5" y="8" width="3" height="3" />
         <rect x="10" y="8" width="3" height="3" />
@@ -107,10 +107,10 @@ function ShortcutIcon({ view, active }: { view: HeaderView; active: boolean }) {
 
   if (view === "build") {
     const buildIconClass = cn(
-      "h-8 w-8 transition-colors md:h-9 md:w-9",
+      "h-7 w-7 transition-colors sm:h-8 sm:w-8 md:h-9 md:w-9",
       active
         ? "text-primary drop-shadow-[0_0_10px_rgba(59,130,246,0.24)]"
-        : "text-[#EBCB8B] drop-shadow-[0_0_9px_rgba(235,203,139,0.28)] group-hover:text-[#f2d9a4]"
+        : "text-[#d9c092] drop-shadow-[0_0_8px_rgba(235,203,139,0.22)] group-hover:text-[#f2d9a4]"
     );
 
     return (

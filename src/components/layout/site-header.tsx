@@ -12,10 +12,14 @@ export function SiteHeader() {
       <div className="w-full pt-2 md:pt-3">
         <div className="mx-auto w-[92vw] rounded-2xl border border-interactive-border/80 bg-[linear-gradient(180deg,rgba(16,24,42,0.86),rgba(10,16,30,0.78))] shadow-card md:w-[80vw]">
           <div className="grid items-center gap-1.5 px-4 py-1.5 md:grid-cols-[1fr_auto_1fr] md:gap-2 md:px-6 md:py-2">
-            <Link href="/" title="Gastón Germán Gonzalez | Software Engineer" className="group flex min-w-0 items-center gap-3 md:gap-3.5">
+            <Link
+              href="/"
+              title="Gastón Germán Gonzalez | Software Engineer"
+              className="group mx-auto flex min-w-0 items-center justify-center gap-3 md:mx-0 md:justify-start md:gap-3.5"
+            >
               <BrandIcon />
-              <span className="min-w-0 truncate">
-                <span className="font-sans text-[11px] font-semibold tracking-[0.01em] text-foreground transition-colors group-hover:text-foreground/95 md:text-[13px]">
+              <span className="min-w-0 truncate text-center md:text-left">
+                <span className="font-sans text-[12px] font-semibold tracking-[0.01em] text-foreground transition-colors group-hover:text-foreground/95 md:text-[13px]">
                   Gastón Germán Gonzalez
                 </span>
                 <span className="mx-1.5 text-foreground/35">|</span>
@@ -25,9 +29,11 @@ export function SiteHeader() {
               </span>
             </Link>
 
-            <HeaderClock />
+            <div className="hidden md:block">
+              <HeaderClock />
+            </div>
 
-            <div className="justify-self-end">
+            <div className="hidden justify-self-end md:block">
               <p className="flex items-center gap-1.5 whitespace-nowrap font-mono text-[11px] text-foreground/72 md:text-xs">
                 <span>{profileContent.location}</span>
                 <OnlineStatusIcon />

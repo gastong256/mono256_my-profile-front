@@ -18,6 +18,9 @@ export const defaultMetadata: Metadata = {
     template: `%s | ${siteContent.name}`
   },
   description: siteContent.description,
+  alternates: {
+    canonical: "/"
+  },
   openGraph: {
     title: siteContent.title,
     description: siteContent.description,
@@ -37,6 +40,9 @@ export function createPageMetadata({
   return {
     title,
     description,
+    alternates: {
+      canonical: path
+    },
     openGraph: {
       title,
       description,

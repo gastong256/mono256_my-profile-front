@@ -24,6 +24,12 @@
     background-attachment: fixed;
   }
 
+  @media (max-width: 768px) {
+    body {
+      background-attachment: scroll;
+    }
+  }
+
   body::before,
   body::after {
     content: "";
@@ -47,6 +53,13 @@
     mix-blend-mode: screen;
   }
 
+  @media (max-width: 768px) {
+    body::after {
+      opacity: 0.08;
+      mix-blend-mode: normal;
+    }
+  }
+
   a {
     @apply text-brand transition-colors;
   }
@@ -58,6 +71,17 @@
   ::selection {
     background: hsl(var(--color-selected) / 0.85);
     color: hsl(var(--color-fg) / 1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    body::before {
+      opacity: 0.24;
+    }
+
+    body::after {
+      opacity: 0;
+      mix-blend-mode: normal;
+    }
   }
 }
 

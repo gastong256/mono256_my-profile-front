@@ -12,6 +12,12 @@ export const metadata: Metadata = createPageMetadata({
   path: "/result"
 });
 
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return [{ id: "installation-summary" }];
+}
+
 type ResultPageProps = {
   params: {
     id: string;

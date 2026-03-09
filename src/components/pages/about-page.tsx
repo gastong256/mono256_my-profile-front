@@ -82,12 +82,13 @@ export function AboutPage() {
             <div className="mt-1.5 grid grid-cols-[76px_minmax(0,1fr)] items-center gap-3 md:grid-cols-[84px_minmax(0,1fr)] md:gap-4">
               <div className="overflow-hidden rounded-md border border-white/15 bg-background/40 shadow-[0_8px_20px_rgba(0,0,0,0.25)]">
                 <Image
-                  src="/images/profile/profile.png"
+                  src="/images/profile/profile.webp"
                   alt="Gastón Germán Gonzalez profile photo"
                   width={168}
                   height={224}
+                  sizes="(min-width: 768px) 84px, 76px"
+                  quality={70}
                   className="h-[92px] w-full object-cover md:h-[100px]"
-                  priority
                 />
               </div>
               <div>

@@ -12,7 +12,7 @@ type SocialItem = {
   href: string;
 };
 
-const releaseLabel = "v0.1.1";
+const releaseLabel = "v0.1.2";
 
 const socialItems: SocialItem[] = [
   { label: "Email", href: `mailto:${siteContent.contactEmail}` },

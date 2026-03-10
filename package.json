@@ -1,6 +1,6 @@
 {
   "name": "mono256_my-profile-front",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "private": true,
   "description": "Frontend application for the mono256_my-profile project.",
   "scripts": {

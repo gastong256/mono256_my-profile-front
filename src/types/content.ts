@@ -51,12 +51,25 @@ export type ProfileContent = {
 export type ProjectItem = {
   slug: string;
   name: string;
+  detailTitle?: string;
+  status?: {
+    label: string;
+    tone?: "featured" | "production" | "neutral";
+  };
   summary: string;
   overview: string;
   highlights: string[];
+  stackGroups?: {
+    label: string;
+    items: string[];
+  }[];
   lastUpdated: string;
   tech: string[];
-  repositoryUrl: string;
+  repositories?: {
+    backend?: string;
+    frontend?: string;
+  };
+  repositoryUrl?: string;
   demoUrl?: string;
   featured?: boolean;
 };

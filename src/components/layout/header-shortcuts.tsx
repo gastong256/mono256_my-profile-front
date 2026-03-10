@@ -13,7 +13,7 @@ export function HeaderShortcuts() {
   const activeView = getActiveView(pathname);
 
   return (
-    <nav aria-label="Desktop shortcuts" className="hidden w-full md:block">
+    <nav aria-label="Desktop shortcuts" className="w-full">
       <ul className="mx-auto flex max-w-none flex-wrap justify-center gap-4 md:gap-5">
         {shortcuts.map((shortcut) => (
           <li key={shortcut.view} className="flex justify-center">

@@ -1,6 +1,6 @@
 import type { SiteContent } from "@/types/content";
 
-export const siteConfig: SiteContent & { domain: string; github: string; linkedin: string } = {
+export const siteContent: SiteContent & { domain: string; github: string; linkedin: string } = {
   name: "Gaston Gonzalez",
   title: "Gaston Gonzalez | Software Engineer",
   description:
@@ -23,4 +23,4 @@ export const siteConfig: SiteContent & { domain: string; github: string; linkedi
   ]
 };
 
-export const siteContent = siteConfig;
+export const siteConfig = siteContent;

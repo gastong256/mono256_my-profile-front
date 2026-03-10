@@ -1,50 +1,45 @@
 import Link from "next/link";
-import dynamic from "next/dynamic";
 
+import { HeaderClock } from "@/components/shared/system/header-clock";
 import { profileContent } from "@/content/profile";
 
-import { HeaderClock } from "./header-clock";
 import { HeaderShortcuts } from "./header-shortcuts";
+import { HeaderShortcutsMenu } from "./header-shortcuts-menu";
 import { PageContainer } from "./page-container";
-
-const HeaderShortcutsMenu = dynamic(
-  () => import("./header-shortcuts-menu").then((module) => module.HeaderShortcutsMenu),
-  { ssr: false }
-);
 
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 shrink-0 bg-background/55 backdrop-blur-md">
       <div className="w-full pt-2 md:pt-3">
         <div className="mx-auto w-[92vw] rounded-2xl border border-interactive-border/80 bg-[linear-gradient(180deg,rgba(16,24,42,0.86),rgba(10,16,30,0.78))] shadow-card md:w-[80vw]">
-          <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-1.5 px-4 py-1.5 md:grid-cols-[1fr_auto_1fr] md:gap-2 md:px-6 md:py-2">
+          <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-1.5 px-4 py-1.5 lg:grid-cols-[1fr_auto_1fr] lg:gap-2 lg:px-6 lg:py-2">
             <Link
               href="/"
               title="Gastón Germán Gonzalez | Software Engineer"
-              className="group flex min-w-0 items-center justify-start gap-3 md:gap-3.5"
+              className="group flex min-w-0 items-center justify-start gap-3 lg:gap-3.5"
             >
               <BrandIcon />
-              <span className="min-w-0 truncate text-left">
-                <span className="font-sans text-[12px] font-semibold tracking-[0.01em] text-foreground transition-colors group-hover:text-foreground/95 md:text-[13px]">
+              <span className="min-w-0 text-left">
+                <span className="block truncate font-sans text-[12px] font-semibold tracking-[0.01em] text-foreground transition-colors group-hover:text-foreground/95 md:inline md:text-[13px]">
                   Gastón Germán Gonzalez
                 </span>
-                <span className="mx-1.5 text-foreground/35">|</span>
-                <span className="font-mono text-[10px] tracking-[0.06em] text-brand/90 transition-colors group-hover:text-brand md:text-[11px]">
-                  Software Engineer
+                <span className="mx-1.5 hidden text-foreground/35 md:inline">|</span>
+                <span className="mt-0.5 block font-mono text-[10px] tracking-[0.06em] text-brand/90 transition-colors group-hover:text-brand md:mt-0 md:inline md:text-[11px]">
+                  {profileContent.role}
                 </span>
               </span>
             </Link>
 
-            <div className="justify-self-end md:hidden">
+            <div className="justify-self-end lg:hidden">
               <HeaderShortcutsMenu />
             </div>
 
-            <div className="hidden md:block">
+            <div className="hidden lg:block">
               <HeaderClock />
             </div>
 
-            <div className="hidden justify-self-end md:block">
-              <p className="flex items-center gap-1.5 whitespace-nowrap font-mono text-[11px] text-foreground/72 md:text-xs">
+            <div className="hidden justify-self-end lg:block">
+              <p className="flex items-center gap-1.5 whitespace-nowrap font-mono text-[11px] text-foreground/72 lg:text-xs">
                 <span>{profileContent.location}</span>
                 <OnlineStatusIcon />
               </p>
@@ -53,8 +48,8 @@ export function SiteHeader() {
         </div>
       </div>
 
-      <PageContainer className="hidden py-2 md:block md:py-2.5">
-        <div className="mx-auto flex w-full max-w-[1120px] flex-col gap-2 md:gap-2.5">
+      <PageContainer className="hidden py-2 lg:block lg:py-2.5">
+        <div className="mx-auto flex w-full max-w-[1120px] flex-col gap-2 lg:gap-2.5">
           <HeaderShortcuts />
         </div>
       </PageContainer>

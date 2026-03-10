@@ -44,6 +44,7 @@ The project follows these principles:
 The shared layout layer uses a token-based dark theme with a Fedora-inspired blue accent direction (cool primary tones, subtle slate surfaces, and blue-focused interaction states).  
 Core tokens are defined in `src/styles/tokens.css` and mapped through `tailwind.config.ts`.  
 Reusable interaction classes for shared UI primitives live in `src/components/ui/foundation.ts` and are consumed by base components (`button`, `input`, `textarea`, `badge`, and shared layout interactions).
+Window-shell layout primitives are centralized in `src/components/shared/window/foundation.ts` to keep page window behavior consistent across sections.
 
 ### Route Segmentation
 
@@ -63,9 +64,6 @@ mono256_my-profile-front/
   public/
     images/
       profile/
-      projects/
-      og/
-    icons/
     favicon.ico
 
   src/
@@ -93,6 +91,10 @@ mono256_my-profile-front/
       pages/
       ui/
       shared/
+        icons/
+        primitives/
+        system/
+        window/
 
     content/
       site.ts

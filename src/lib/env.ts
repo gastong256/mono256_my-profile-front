@@ -1,6 +1,4 @@
-const requiredPublicKeys = ["NEXT_PUBLIC_SITE_URL", "NEXT_PUBLIC_API_URL"] as const;
-
-type PublicEnvKey = (typeof requiredPublicKeys)[number];
+type PublicEnvKey = "NEXT_PUBLIC_SITE_URL" | "NEXT_PUBLIC_API_URL";
 
 function readEnv(key: PublicEnvKey, fallback: string): string {
   return process.env[key] || fallback;

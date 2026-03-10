@@ -12,6 +12,4 @@ export const navItemActiveClass = "bg-nav-active/55";
 export const iconInteractiveClass =
   "inline-flex items-center justify-center rounded-sm transition-all duration-150 hover:-translate-y-px hover:bg-nav-hover/70";
 
-export const panelSurfaceClass = "rounded-lg border border-border/80 bg-surface";
-
 export const panelSurfaceElevatedClass = "rounded-lg border border-border-interactive/80 bg-surface-elevated shadow-card";

@@ -5,9 +5,13 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 import { productContent } from "@/content/product";
-import { WindowPageShell } from "@/components/layout/window-page-shell";
+import {
+  windowFillColumnClass,
+  windowNoScrollContainerClass
+} from "@/components/shared/window/foundation";
+import { WindowPageShell } from "@/components/shared/window/window-page-shell";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { statusPillClassName } from "@/components/ui/status-pill";
+import { statusPillBaseClassName, statusPillClassName } from "@/components/ui/status-pill";
 
 const templateOptions = [
   {
@@ -55,8 +59,8 @@ export function CreatePageContent() {
         }
       }}
     >
-      <div className="md:h-full md:overflow-hidden">
-        <div className="flex min-h-full flex-col">
+      <div className={windowNoScrollContainerClass}>
+        <div className={windowFillColumnClass}>
           <p className="font-mono text-[11px] uppercase tracking-wide text-foreground/60">Step 2 of 2 · Connections</p>
           <h1 className="mt-1.5 text-xl font-semibold tracking-tight md:text-2xl">{productContent.installTitle}</h1>
 
@@ -122,8 +126,8 @@ function ProviderCard({
         <span
           className={
             connected
-              ? statusPillClassName("inline-flex rounded-full border px-2 py-0.5 text-[10px] font-mono uppercase tracking-wide", "success")
-              : statusPillClassName("inline-flex rounded-full border px-2 py-0.5 text-[10px] font-mono uppercase tracking-wide", "neutral")
+              ? statusPillClassName(statusPillBaseClassName, "success")
+              : statusPillClassName(statusPillBaseClassName, "neutral")
           }
         >
           {connected ? "connected" : "pending"}
@@ -158,8 +162,8 @@ function TemplateSelector({
         <span
           className={
             selectedTemplate
-              ? statusPillClassName("inline-flex rounded-full border px-2 py-0.5 text-[10px] font-mono uppercase tracking-wide", "success")
-              : statusPillClassName("inline-flex rounded-full border px-2 py-0.5 text-[10px] font-mono uppercase tracking-wide", "neutral")
+              ? statusPillClassName(statusPillBaseClassName, "success")
+              : statusPillClassName(statusPillBaseClassName, "neutral")
           }
         >
           {selectedTemplate ? "selected" : "required"}

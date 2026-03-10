@@ -1,5 +1,5 @@
 import { PageContainer } from "@/components/layout/page-container";
-import { WindowFrame } from "@/components/ui/window-frame";
+import { WindowFrame } from "@/components/shared/window/window-frame";
 
 export function DesktopSurface() {
   return (
@@ -55,24 +55,29 @@ export function DesktopSurface() {
               </p>
               <div className="mt-2 space-y-0.5 leading-[1.35rem] md:leading-[1.5rem] lg:space-y-0.5">
                 <p>
-                  <span className="font-semibold text-[#7D8896]">engineer_role....</span>{" "}
-                  <span className="font-medium text-[#E6EDF3]">Senior Software Engineer</span>
+                  <span className="block font-semibold text-[#7D8896] lg:hidden">engineer_role</span>
+                  <span className="hidden font-semibold text-[#7D8896] lg:inline">engineer_role....</span>
+                  <span className="block pl-3 font-medium text-[#E6EDF3] lg:ml-2 lg:inline lg:pl-0">Senior Software Engineer</span>
                 </p>
                 <p>
-                  <span className="font-semibold text-[#7D8896]">focus............</span>{" "}
-                  <span className="font-medium text-[#E6EDF3]">Systems design · Automation · DevOps culture</span>
+                  <span className="block font-semibold text-[#7D8896] lg:hidden">focus</span>
+                  <span className="hidden font-semibold text-[#7D8896] lg:inline">focus............</span>
+                  <span className="block pl-3 font-medium text-[#E6EDF3] lg:ml-2 lg:inline lg:pl-0">Systems design · Automation · DevOps culture</span>
                 </p>
                 <p>
-                  <span className="font-semibold text-[#7D8896]">stack............</span>{" "}
-                  <span className="font-medium text-[#E6EDF3]">Python · Node · FastAPI · Cloud · CI/CD</span>
+                  <span className="block font-semibold text-[#7D8896] lg:hidden">stack</span>
+                  <span className="hidden font-semibold text-[#7D8896] lg:inline">stack............</span>
+                  <span className="block pl-3 font-medium text-[#E6EDF3] lg:ml-2 lg:inline lg:pl-0">Python · Node · FastAPI · Cloud · CI/CD</span>
                 </p>
                 <p>
-                  <span className="font-semibold text-[#7D8896]">experience.......</span>{" "}
-                  <span className="font-medium text-[#E6EDF3]">SaaS platforms · Banking infrastructure</span>
+                  <span className="block font-semibold text-[#7D8896] lg:hidden">experience</span>
+                  <span className="hidden font-semibold text-[#7D8896] lg:inline">experience.......</span>
+                  <span className="block pl-3 font-medium text-[#E6EDF3] lg:ml-2 lg:inline lg:pl-0">SaaS platforms · Banking infrastructure</span>
                 </p>
                 <p>
-                  <span className="font-semibold text-[#7D8896]">availability.....</span>{" "}
-                  <span className="font-medium text-[#A3BE8C]">Open to consulting and senior roles</span>
+                  <span className="block font-semibold text-[#7D8896] lg:hidden">availability</span>
+                  <span className="hidden font-semibold text-[#7D8896] lg:inline">availability.....</span>
+                  <span className="block pl-3 font-medium text-[#A3BE8C] lg:ml-2 lg:inline lg:pl-0">Open to consulting and senior roles</span>
                 </p>
               </div>
 
@@ -84,10 +89,22 @@ export function DesktopSurface() {
                 <p className="leading-[1.05rem] md:leading-[1.2rem]">
                   <span className="font-semibold text-[#EBCB8B]">build-yours/</span>
                 </p>
-                <p className="whitespace-pre-wrap leading-[1.05rem] text-[#A9B4C0] md:leading-[1.2rem]">
-                  └─ developer site builder
-                  <br />
-                  {"   "}github-connected · vercel-ready · 2-click deploy
+                <p className="leading-[1.05rem] text-[#A9B4C0] md:leading-[1.2rem]">
+                  <span className="lg:hidden">└─ developer site builder</span>
+                  <span className="hidden lg:inline">└─ developer site builder</span>
+                  <span className="mt-0.5 block lg:hidden">
+                    <span className="invisible">└─ </span>
+                    <span className="inline-block pl-2">github-connected</span>
+                  </span>
+                  <span className="block lg:hidden">
+                    <span className="invisible">└─ </span>
+                    <span className="inline-block pl-2">vercel-ready</span>
+                  </span>
+                  <span className="block lg:hidden">
+                    <span className="invisible">└─ </span>
+                    <span className="inline-block pl-2">2-click deploy</span>
+                  </span>
+                  <span className="hidden whitespace-pre-wrap lg:block">{"   "}github-connected · vercel-ready · 2-click deploy</span>
                 </p>
               </div>
               <p className="mt-3 lg:mt-3.5">

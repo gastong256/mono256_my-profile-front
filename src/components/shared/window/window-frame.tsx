@@ -105,7 +105,7 @@ export function WindowFrame({
           </div>
         ) : null}
       </header>
-      <div className={cn("p-5 md:p-6", isFixed ? "md:min-h-0 md:flex-1 md:overflow-y-auto" : undefined, bodyClassName)}>{children}</div>
+      <div className={cn("min-w-0 p-5 md:p-6", isFixed ? "md:min-h-0 md:flex-1 md:overflow-y-auto" : undefined, bodyClassName)}>{children}</div>
     </section>
   );
 }

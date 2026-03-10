@@ -1,9 +1,8 @@
 import type { ReactNode } from "react";
 
-import { WindowFrame, type WindowFrameHelp, type WindowFrameSize, type WindowFrameStatus } from "@/components/ui/window-frame";
+import { PageContainer } from "@/components/layout/page-container";
+import { WindowFrame, type WindowFrameHelp, type WindowFrameSize, type WindowFrameStatus } from "@/components/shared/window/window-frame";
 import { cn } from "@/lib/utils/cn";
-
-import { PageContainer } from "./page-container";
 
 type WindowPageShellProps = {
   children: ReactNode;

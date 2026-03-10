@@ -38,16 +38,19 @@ export const projectsContent: ProjectItem[] = [
   },
   {
     slug: "my-profile-generator",
-    name: "my-profile / website generator",
+    name: "Developer Site Generator",
     summary:
-      "A personal website baseline evolving into a generator for developers to create and deploy a professional portfolio in a simple flow. Status: In progress.",
+      "A developer site generator that connects GitHub and Vercel to create and deploy a production-ready personal site in a simple flow. Status: In progress.",
+
     overview:
-      "This project starts as a production-ready personal website and evolves into a product that generates a portfolio from GitHub and deploys it through Vercel.",
+      "Started as a production-ready personal website and is evolving into a developer tool that generates structured engineering sites from GitHub repositories and deploys them through Vercel.",
+
     highlights: [
-      "Product direction centered on speed, usability, and clean technical defaults.",
-      "Architecture designed for incremental evolution from portfolio to generator.",
-      "Current phase focused on implementing the core user flow and integration model."
+      "Product direction focused on fast setup, clean defaults, and minimal configuration.",
+      "Architecture designed to evolve from a single site into a reusable generation platform.",
+      "Current phase focused on implementing the core onboarding flow and platform integrations."
     ],
+
     lastUpdated: "Mar 2026",
     tech: ["Next.js", "Fastify", "BullMQ", "PostgreSQL", "Redis"],
     repositoryUrl: "https://github.com/gastong256/mono256_my-profile-front",

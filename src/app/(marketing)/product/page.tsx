@@ -5,7 +5,7 @@ import { createPageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Product",
-  description: "Coming-soon generator concept: connect GitHub, connect Vercel, and get a production-ready portfolio baseline.",
+  description: "Developer site generator. Connect GitHub, deploy with Vercel, and get a production-ready engineering site in minutes. Currently in development.",
   path: "/product"
 });
 

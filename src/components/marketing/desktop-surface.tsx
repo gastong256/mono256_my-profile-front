@@ -1,8 +1,5 @@
-import Link from "next/link";
-
 import { PageContainer } from "@/components/layout/page-container";
 import { WindowFrame } from "@/components/ui/window-frame";
-import { profileContent } from "@/content/profile";
 
 export function DesktopSurface() {
   return (
@@ -27,95 +24,73 @@ export function DesktopSurface() {
             bodyClassName="bg-[linear-gradient(180deg,rgba(10,12,19,0.34),rgba(8,10,16,0.08))] p-4 md:p-7"
           >
             <div className="font-mono text-[13px] leading-7 md:text-[15px] md:leading-8">
-              <div className="space-y-0 leading-5 md:leading-6">
+              <div className="space-y-0">
                 <p>
                   <span className="text-[12px] font-medium text-[#88C0D0] md:text-[13px]">gastong256@dev:~$</span>{" "}
-                  <span className="text-[12px] font-normal text-[#C7CFDA] md:text-[13px]">make init</span>
+                  <span className="text-[12px] font-normal text-[#C7CFDA] md:text-[13px]">whoami</span>
                 </p>
-                <p>
-                  <span className="text-xs font-semibold uppercase text-[#7D8896]">[SYSTEM]</span>{" "}
-                  <span className="text-sm font-normal text-[#A9B4C0]">Booting portfolio interface...</span>
-                </p>
-                <p>
-                  <span className="text-xs font-semibold uppercase text-[#A3BE8C]">[OK]</span>{" "}
-                  <span className="text-sm font-normal text-[#A9B4C0]">Identity loaded</span>
-                </p>
-                <p>
-                  <span className="text-xs font-semibold uppercase text-[#A3BE8C]">[OK]</span>{" "}
-                  <span className="text-sm font-normal text-[#A9B4C0]">Navigation ready</span>
-                </p>
-                <p className="my-0 overflow-hidden whitespace-nowrap text-[#253041]">────────────────────────────────────────────────────────────</p>
-                <p className="mt-1.5 font-sans text-[18px] font-extrabold tracking-[0.08em] text-[#E6EDF3] md:text-[24px]">GASTON GONZALEZ</p>
-                <p className="mt-1.5 font-sans text-[12px] font-semibold tracking-[0.04em] text-[#88C0D0] md:text-[14px]">{"// SENIOR SOFTWARE ENGINEER"}</p>
-                <p className="mt-3 font-sans text-[15px] font-medium leading-6 text-[#E6EDF3] md:text-[17px] md:leading-7">
-                  <span className="mr-2 font-mono font-semibold text-[#88C0D0]">&gt;</span>
-                  Backend engineer focused on scalable systems, reliable APIs, and architecture that holds up in production.
-                </p>
-                <p className="mt-2 font-sans text-[14px] font-normal leading-6 text-[#A9B4C0] md:text-[15px] md:leading-7">
-                  <span className="mr-2 font-mono font-semibold text-[#88C0D0]">&gt;</span>
-                  I build microservices, automation platforms, and internal tools with a strong DevOps and systems mindset.
-                </p>
-                <p className="mt-2 font-sans text-[14px] font-normal leading-6 text-[#A9B4C0] md:text-[15px] md:leading-7">
-                  <span className="mr-2 font-mono font-semibold text-[#88C0D0]">&gt;</span>
-                  Background in SaaS, critical infrastructure, and cloud-native delivery.
-                </p>
-                <p className="my-0 overflow-hidden whitespace-nowrap text-[#253041]">────────────────────────────────────────────────────────────</p>
+                <div className="mt-2">
+                  <p className="font-sans text-[18px] font-extrabold leading-tight tracking-[0.08em] text-[#E6EDF3] md:text-[24px]">GASTON GONZALEZ</p>
+                  <p className="mt-0.5 font-sans text-[12px] font-semibold leading-tight tracking-[0.04em] text-[#88C0D0] md:text-[14px]">Senior Software Engineer</p>
+                  <p className="mt-1.5 font-sans text-[13px] font-medium leading-[1.35rem] text-[#A9B4C0] md:text-[14px] md:leading-[1.5rem]">Argentina · Remote worldwide</p>
+                </div>
               </div>
-              <p>
+
+              <p className="mt-3 md:mt-4">
                 <span className="text-[12px] font-medium text-[#88C0D0] md:text-[13px]">gastong256@dev:~$</span>{" "}
-                <span className="text-[12px] font-normal text-[#C7CFDA] md:text-[13px]">cat quick_info.txt</span>
+                <span className="text-[12px] font-normal text-[#C7CFDA] md:text-[13px]">cat summary.txt</span>
               </p>
-              <p>
-                <span className="font-semibold text-[#7D8896]">focus</span>
-                <span className="text-[#7D8896]">:</span> <span className="font-medium text-[#E6EDF3]">Backend · Systems Architecture · DevOps Culture</span>
-              </p>
-              <p>
-                <span className="font-semibold text-[#7D8896]">stack</span>
-                <span className="text-[#7D8896]">:</span> <span className="font-medium text-[#E6EDF3]">Python · FastAPI · Django · Cloud · CI/CD</span>
-              </p>
-              <p>
-                <span className="font-semibold text-[#7D8896]">background</span>
-                <span className="text-[#7D8896]">:</span> <span className="font-medium text-[#E6EDF3]">SaaS · Banking Infrastructure · Automation</span>
-              </p>
-              <p>
-                <span className="font-semibold text-[#7D8896]">status</span>
-                <span className="text-[#7D8896]">:</span> <span className="font-medium text-[#A3BE8C]">Open to consulting and senior engineering roles</span>
-              </p>
-              <p>
-                <span className="font-semibold text-[#7D8896]">location</span>
-                <span className="text-[#7D8896]">:</span>{" "}
-                <span className="font-medium text-[#E6EDF3]">{profileContent.location.replace(" - ", " · ")}</span>
-              </p>
-              <p className="mt-2">
+              <div className="mt-2 space-y-0.5">
+                <p className="font-sans text-[14px] font-medium leading-[1.35rem] text-[#E6EDF3] md:text-[15px] md:leading-[1.5rem]">
+                  Software engineer focused on building reliable systems, clean architectures, and software that holds up in production.
+                </p>
+                <p className="font-sans text-[14px] font-normal leading-[1.35rem] text-[#A9B4C0] md:text-[15px] md:leading-[1.5rem]">
+                  Strong interest in automation, DevOps culture, and scalable service design.
+                </p>
+              </div>
+
+              <p className="mt-3 md:mt-4">
                 <span className="text-[12px] font-medium text-[#88C0D0] md:text-[13px]">gastong256@dev:~$</span>{" "}
-                <span className="text-[12px] font-normal text-[#C7CFDA] md:text-[13px]">ls /products</span>
+                <span className="text-[12px] font-normal text-[#C7CFDA] md:text-[13px]">sysinfo</span>
               </p>
-              <p>
-                <span className="font-semibold text-[#EBCB8B]">Build Yours</span>
-                <span className="font-normal text-[#7D8896]">{" → "}</span>
-                <span className="font-normal text-[#A9B4C0]">Template-based portfolio builder for developers</span>
-              </p>
-              <p className="-mt-2">
-                <span className="inline-block w-[14ch]" aria-hidden />
-                <span className="font-medium text-[#7D8896]">GitHub + Vercel ready</span>
-              </p>
-              <p className="mt-2">
+              <div className="mt-2 space-y-0.5 leading-[1.35rem] md:leading-[1.5rem]">
+                <p>
+                  <span className="font-semibold text-[#7D8896]">engineer_role....</span>{" "}
+                  <span className="font-medium text-[#E6EDF3]">Senior Software Engineer</span>
+                </p>
+                <p>
+                  <span className="font-semibold text-[#7D8896]">focus............</span>{" "}
+                  <span className="font-medium text-[#E6EDF3]">Systems design · Automation · DevOps culture</span>
+                </p>
+                <p>
+                  <span className="font-semibold text-[#7D8896]">stack............</span>{" "}
+                  <span className="font-medium text-[#E6EDF3]">Python · Node · FastAPI · Cloud · CI/CD</span>
+                </p>
+                <p>
+                  <span className="font-semibold text-[#7D8896]">experience.......</span>{" "}
+                  <span className="font-medium text-[#E6EDF3]">SaaS platforms · Banking infrastructure</span>
+                </p>
+                <p>
+                  <span className="font-semibold text-[#7D8896]">availability.....</span>{" "}
+                  <span className="font-medium text-[#A3BE8C]">Open to consulting and senior roles</span>
+                </p>
+              </div>
+
+              <p className="mt-3 md:mt-4">
                 <span className="text-[12px] font-medium text-[#88C0D0] md:text-[13px]">gastong256@dev:~$</span>{" "}
-                <span className="text-[12px] font-normal text-[#C7CFDA] md:text-[13px]">open --nav</span>{" "}
-                <Link href="/about" className="font-medium text-[#A9B4C0] hover:text-[#E6EDF3]">
-                  [Profile]
-                </Link>{" "}
-                <Link href="/projects" className="font-medium text-[#A9B4C0] hover:text-[#E6EDF3]">
-                  [Projects]
-                </Link>{" "}
-                <Link href="/contact" className="font-medium text-[#A9B4C0] hover:text-[#E6EDF3]">
-                  [Contact]
-                </Link>{" "}
-                <Link href="/product" className="font-medium text-[#88C0D0] hover:text-[#E6EDF3]">
-                  [Build yours]
-                </Link>
+                <span className="text-[12px] font-normal text-[#C7CFDA] md:text-[13px]">ls /product</span>
               </p>
-              <p>
+              <div className="mt-2 space-y-0">
+                <p className="leading-[1.05rem] md:leading-[1.2rem]">
+                  <span className="font-semibold text-[#EBCB8B]">build-yours/</span>
+                </p>
+                <p className="whitespace-pre-wrap leading-[1.05rem] text-[#A9B4C0] md:leading-[1.2rem]">
+                  └─ developer site builder
+                  <br />
+                  {"   "}github-connected · vercel-ready · 2-click deploy
+                </p>
+              </div>
+              <p className="mt-3">
                 <span className="text-[12px] font-medium text-[#88C0D0] md:text-[13px]">gastong256@dev:~$</span>{" "}
                 <span className="cursor-blink inline-block h-5 w-[4px] rounded-sm bg-[#E6EDF3] align-middle opacity-95" aria-hidden />
               </p>

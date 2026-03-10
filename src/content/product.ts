@@ -9,7 +9,7 @@ export const productContent: ProductContent = {
     {
       title: "Connect GitHub",
       description:
-        "Connect your repositories and profile metadata to generate structured portfolio content."
+        "Import repositories and profile data to generate your developer site."
     },
     {
       title: "Connect Vercel",

@@ -16,14 +16,14 @@ const templateOptions = [
     description: "Clean terminal-forward layout with restrained accents."
   },
   {
-    id: "docs-portfolio",
-    name: "Docs Portfolio",
-    description: "Documentation-style structure focused on readability."
+    id: "docs-style",
+    name: "Docs Style",
+    description: "Documentation-style developer site focused on clarity, structured sections, and easy navigation."
   },
   {
-    id: "product-card",
-    name: "Product Card",
-    description: "Card-oriented portfolio optimized for quick scanning."
+    id: "cards",
+    name: "Cards",
+    description: "Card-based developer site layout optimized for quickly exploring projects."
   }
 ] as const;
 
@@ -38,66 +38,66 @@ export function CreatePageContent() {
 
   return (
     <WindowPageShell
-        title="BuildYours.exe"
-        subtitle="Setup"
-        windowBodyClassName="p-4 md:p-4"
-        status="interactive"
-        help={{
-          section: "Create",
-          path: "~/BuildYours.exe/install",
-          items: [
-            "Preview the GitHub and Vercel connection flow, then choose a template.",
-            "Run the preview installation to continue into the summary view."
-          ],
-          cta: {
-            label: "Back To Overview",
-            href: "/product"
-          }
-        }}
-      >
-        <div className="h-full overflow-y-auto md:overflow-hidden">
-          <div className="flex min-h-full flex-col">
-            <p className="font-mono text-[11px] uppercase tracking-wide text-foreground/60">Step 2 of 2 · Connections</p>
-            <h1 className="mt-1.5 text-xl font-semibold tracking-tight md:text-2xl">{productContent.installTitle}</h1>
+      title="BuildYours.exe"
+      subtitle="Setup"
+      windowBodyClassName="p-4 md:p-4"
+      status="interactive"
+      help={{
+        section: "Create",
+        path: "~/BuildYours.exe/install",
+        items: [
+          "Preview the GitHub and Vercel connection flow, then choose a template.",
+          "Run the preview installation to continue into the summary view."
+        ],
+        cta: {
+          label: "Back To Overview",
+          href: "/product"
+        }
+      }}
+    >
+      <div className="h-full overflow-y-auto md:overflow-hidden">
+        <div className="flex min-h-full flex-col">
+          <p className="font-mono text-[11px] uppercase tracking-wide text-foreground/60">Step 2 of 2 · Connections</p>
+          <h1 className="mt-1.5 text-xl font-semibold tracking-tight md:text-2xl">{productContent.installTitle}</h1>
 
-            <div className="mt-3 grid min-h-0 flex-1 gap-2.5 lg:grid-cols-[370px_minmax(0,1fr)]">
-              <div className="space-y-2.5">
-                <ProviderCard
-                  name="GitHub"
-                  description="Connect repository access so the generator can map your profile and project metadata."
-                  connected={githubConnected}
-                  onConnect={() => setGithubConnected((state) => !state)}
-                />
-                <ProviderCard
-                  name="Vercel"
-                  description="Connect deployment access so the generated baseline can be built and published."
-                  connected={vercelConnected}
-                  onConnect={() => setVercelConnected((state) => !state)}
-                />
-                <TemplateSelector
-                  options={templateOptions}
-                  selectedTemplate={selectedTemplate}
-                  onSelectTemplate={setSelectedTemplate}
-                />
-              </div>
-
-              <PreviewPanel
-                templateName={activeTemplate?.name ?? "No template selected"}
-                templateDescription={activeTemplate?.description ?? "Select one template to continue installation."}
+          <div className="mt-3 grid min-h-0 flex-1 gap-2.5 lg:grid-cols-[370px_minmax(0,1fr)]">
+            <div className="space-y-2.5">
+              <ProviderCard
+                name="GitHub"
+                description="Connect repository access so the generator can map your profile and project metadata."
+                connected={githubConnected}
+                onConnect={() => setGithubConnected((state) => !state)}
+              />
+              <ProviderCard
+                name="Vercel"
+                description="Connect deployment access so the generated baseline can be built and published."
+                connected={vercelConnected}
+                onConnect={() => setVercelConnected((state) => !state)}
+              />
+              <TemplateSelector
+                options={templateOptions}
+                selectedTemplate={selectedTemplate}
+                onSelectTemplate={setSelectedTemplate}
               />
             </div>
 
-            <div className="mt-3 flex flex-wrap items-center justify-between gap-3 border-t border-border/70 pt-3">
-              <Link href="/product" className={buttonVariants({ variant: "secondary", size: "md" })}>
-                Back
-              </Link>
-              <Button type="button" disabled={!canInstall} onClick={() => router.push("/result/installation-summary")} className="min-w-36">
-                Run preview
-              </Button>
-            </div>
+            <PreviewPanel
+              templateName={activeTemplate?.name ?? "No template selected"}
+              templateDescription={activeTemplate?.description ?? "Select one template to continue installation."}
+            />
+          </div>
+
+          <div className="mt-3 flex flex-wrap items-center justify-between gap-3 border-t border-border/70 pt-3">
+            <Link href="/product" className={buttonVariants({ variant: "secondary", size: "md" })}>
+              Back
+            </Link>
+            <Button type="button" disabled={!canInstall} onClick={() => router.push("/result/installation-summary")} className="min-w-36">
+              Run preview
+            </Button>
           </div>
         </div>
-      </WindowPageShell>
+      </div>
+    </WindowPageShell>
   );
 }
 

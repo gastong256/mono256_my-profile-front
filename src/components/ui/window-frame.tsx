@@ -48,7 +48,7 @@ export function WindowFrame({
     <section
       className={cn(
         "overflow-hidden rounded-xl border border-border/90 bg-surface shadow-card",
-        isFixed ? "flex h-full min-h-0 flex-col" : undefined,
+        isFixed ? "md:flex md:h-full md:min-h-0 md:flex-col" : undefined,
         className
       )}
     >
@@ -105,7 +105,7 @@ export function WindowFrame({
           </div>
         ) : null}
       </header>
-      <div className={cn("p-5 md:p-6", isFixed ? "flex-1 overflow-y-auto" : undefined, bodyClassName)}>{children}</div>
+      <div className={cn("p-5 md:p-6", isFixed ? "md:min-h-0 md:flex-1 md:overflow-y-auto" : undefined, bodyClassName)}>{children}</div>
     </section>
   );
 }

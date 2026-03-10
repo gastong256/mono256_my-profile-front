@@ -31,7 +31,7 @@ export function WindowPageShell({
   size = "fixed"
 }: WindowPageShellProps) {
   return (
-    <PageContainer className={cn("flex h-full min-h-0 flex-col py-1 md:py-2", containerClassName)}>
+    <PageContainer className={cn("flex min-h-0 flex-col py-1 md:h-full md:py-2", containerClassName)}>
       <WindowFrame
         title={title}
         subtitle={subtitle}

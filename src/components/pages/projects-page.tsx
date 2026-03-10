@@ -40,7 +40,7 @@ export function ProjectsPage({ selectedSlug }: ProjectsPageProps) {
       >
         {selectedProject ? <ProjectOverview project={selectedProject} /> : <ProjectsDirectory />}
 
-        <div className="border-t border-border/70 bg-background/25 px-4 py-2 md:px-6">
+        <div className="border-t border-border/70 bg-background/25 px-4 py-2 md:px-6 lg:px-5 lg:py-1.5">
           <p className="whitespace-nowrap font-mono text-[11px] text-foreground/70 md:text-xs">
             {selectedProject
               ? `Viewing: ${selectedProject.name}/`
@@ -53,17 +53,17 @@ export function ProjectsPage({ selectedSlug }: ProjectsPageProps) {
 
 function ProjectsDirectory() {
   return (
-    <section className="min-h-0 flex-1 overflow-y-auto p-4 md:p-6">
-      <div className="mb-4 flex items-center gap-2 font-mono text-[11px] text-foreground/65 md:text-xs">
+    <section className="min-h-0 flex-1 p-4 md:overflow-y-auto md:p-6 lg:p-4">
+      <div className="mb-4 flex items-center gap-2 font-mono text-[11px] text-foreground/65 md:text-xs lg:mb-3">
         <span className="text-foreground/75">~/Projects</span>
       </div>
 
-      <div className="grid gap-4 md:auto-rows-fr md:grid-cols-2 xl:grid-cols-3">
+      <div className="grid gap-4 md:auto-rows-fr md:grid-cols-2 lg:grid-cols-3 lg:gap-3">
         {projectsContent.map((project) => (
           <Link
             key={project.slug}
             href={`/projects/${project.slug}`}
-            className="group flex h-full flex-col rounded-lg border border-border/80 bg-surface/75 p-5 transition-colors hover:border-brand/40 hover:bg-surface"
+            className="group flex h-full flex-col rounded-lg border border-border/80 bg-surface/75 p-5 transition-colors hover:border-brand/40 hover:bg-surface lg:p-4"
           >
             <div className="flex items-center justify-between gap-3">
               <div className="flex min-w-0 items-center gap-2">
@@ -73,8 +73,8 @@ function ProjectsDirectory() {
               {project.featured ? <Badge className="shrink-0">Featured</Badge> : null}
             </div>
 
-            <p className="mt-3 flex-1 text-sm text-foreground/75">{project.summary}</p>
-            <div className="mt-4 flex items-center justify-between gap-3">
+            <p className="mt-3 flex-1 text-sm text-foreground/75 lg:mt-2.5 lg:text-[13px]">{project.summary}</p>
+            <div className="mt-4 flex items-center justify-between gap-3 lg:mt-3">
               <p className="font-mono text-[11px] text-brand">open</p>
               <div className="flex items-center gap-1">
                 {project.tech.slice(0, 4).map((tech) => (
@@ -96,7 +96,7 @@ function ProjectsDirectory() {
 
 function ProjectOverview({ project }: { project: ProjectItem }) {
   return (
-    <section className="min-h-0 flex-1 overflow-y-auto p-4 md:p-6">
+    <section className="min-h-0 flex-1 p-4 md:overflow-y-auto md:p-6 lg:p-4">
       <div className="flex items-center gap-2 font-mono text-[11px] text-foreground/65 md:text-xs">
         <Link href="/projects" className="text-foreground/75 hover:text-foreground">
           ~/Projects
@@ -105,16 +105,16 @@ function ProjectOverview({ project }: { project: ProjectItem }) {
         <span className="text-brand">{project.slug}</span>
       </div>
 
-      <div className="mt-4 flex items-center gap-2">
+      <div className="mt-4 flex items-center gap-2 lg:mt-3">
         <FolderIcon className="text-foreground/80" />
         <h2 className="text-xl font-semibold text-foreground md:text-2xl">{project.name}</h2>
       </div>
 
-      <p className="mt-3 max-w-3xl text-sm text-foreground/80 md:text-base">{project.overview}</p>
+      <p className="mt-3 max-w-3xl text-sm text-foreground/80 md:text-base lg:mt-2.5 lg:text-[15px]">{project.overview}</p>
 
-      <div className="mt-6">
+      <div className="mt-6 lg:mt-4">
         <p className="font-mono text-[11px] uppercase tracking-wide text-foreground/60 md:text-xs">Highlights</p>
-        <ul className="mt-3 space-y-2">
+        <ul className="mt-3 space-y-2 lg:mt-2.5 lg:space-y-1.5">
           {project.highlights.map((highlight) => (
             <li key={highlight} className="text-sm text-foreground/80 md:text-[15px]">
               <span className="mr-2 text-brand">•</span>
@@ -124,13 +124,13 @@ function ProjectOverview({ project }: { project: ProjectItem }) {
         </ul>
       </div>
 
-      <div className="mt-6 flex flex-wrap gap-2">
+      <div className="mt-6 flex flex-wrap gap-2 lg:mt-4 lg:gap-1.5">
         {project.tech.map((tech) => (
           <Badge key={`${project.slug}-${tech}`}>{tech}</Badge>
         ))}
       </div>
 
-      <div className="mt-7 flex flex-wrap items-center gap-4 text-sm font-semibold">
+      <div className="mt-7 flex flex-wrap items-center gap-4 text-sm font-semibold lg:mt-5">
         <Link href={project.repositoryUrl} target="_blank" rel="noreferrer">
           Open Repository
         </Link>

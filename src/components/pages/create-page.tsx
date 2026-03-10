@@ -40,7 +40,7 @@ export function CreatePageContent() {
     <WindowPageShell
       title="BuildYours.exe"
       subtitle="Setup"
-      windowBodyClassName="p-4 md:p-4"
+      windowBodyClassName="p-4 md:p-4 lg:p-3.5"
       status="interactive"
       help={{
         section: "Create",
@@ -55,13 +55,13 @@ export function CreatePageContent() {
         }
       }}
     >
-      <div className="h-full overflow-y-auto md:overflow-hidden">
+      <div className="md:h-full md:overflow-hidden">
         <div className="flex min-h-full flex-col">
           <p className="font-mono text-[11px] uppercase tracking-wide text-foreground/60">Step 2 of 2 · Connections</p>
           <h1 className="mt-1.5 text-xl font-semibold tracking-tight md:text-2xl">{productContent.installTitle}</h1>
 
-          <div className="mt-3 grid min-h-0 flex-1 gap-2.5 lg:grid-cols-[370px_minmax(0,1fr)]">
-            <div className="space-y-2.5">
+          <div className="mt-3 grid min-h-0 flex-1 gap-2.5 lg:mt-2.5 lg:gap-2 lg:grid-cols-[360px_minmax(0,1fr)]">
+            <div className="space-y-2.5 lg:space-y-2">
               <ProviderCard
                 name="GitHub"
                 description="Connect repository access so the generator can map your profile and project metadata."
@@ -87,7 +87,7 @@ export function CreatePageContent() {
             />
           </div>
 
-          <div className="mt-3 flex flex-wrap items-center justify-between gap-3 border-t border-border/70 pt-3">
+          <div className="mt-3 flex flex-wrap items-center justify-between gap-3 border-t border-border/70 pt-3 lg:mt-2.5 lg:pt-2.5">
             <Link href="/product" className={buttonVariants({ variant: "secondary", size: "md" })}>
               Back
             </Link>
@@ -113,7 +113,7 @@ function ProviderCard({
   onConnect: () => void;
 }) {
   return (
-    <section className="rounded-lg border border-border/80 bg-surface/80 p-2.5">
+    <section className="rounded-lg border border-border/80 bg-surface/80 p-2.5 lg:p-2">
       <div className="flex items-start justify-between gap-3">
         <div>
           <p className="text-base font-semibold text-foreground">{name}</p>
@@ -130,7 +130,7 @@ function ProviderCard({
         </span>
       </div>
 
-      <div className="mt-2.5">
+      <div className="mt-2.5 lg:mt-2">
         <Button type="button" variant={connected ? "secondary" : "primary"} size="sm" onClick={onConnect}>
           {connected ? `Disconnect ${name}` : `Connect ${name}`}
         </Button>
@@ -149,7 +149,7 @@ function TemplateSelector({
   onSelectTemplate: (value: string | null) => void;
 }) {
   return (
-    <section className="rounded-lg border border-border/80 bg-surface/80 p-2.5">
+    <section className="rounded-lg border border-border/80 bg-surface/80 p-2.5 lg:p-2">
       <div className="flex items-start justify-between gap-3">
         <div>
           <p className="text-base font-semibold text-foreground">Template</p>
@@ -166,7 +166,7 @@ function TemplateSelector({
         </span>
       </div>
 
-      <div className="mt-2.5">
+      <div className="mt-2.5 lg:mt-2">
         <select
           value={selectedTemplate ?? ""}
           onChange={(event) => onSelectTemplate(event.target.value || null)}
@@ -192,15 +192,15 @@ function PreviewPanel({
   templateDescription: string;
 }) {
   return (
-    <aside className="rounded-lg border border-border/80 bg-surface/80 p-3 lg:p-4">
+    <aside className="rounded-lg border border-border/80 bg-surface/80 p-3 lg:p-3">
       <p className="font-mono text-[11px] uppercase tracking-wide text-foreground/60">Preview</p>
-      <div className="mt-2 rounded-md border border-border/70 bg-background/25 p-3">
+      <div className="mt-2 rounded-md border border-border/70 bg-background/25 p-3 lg:p-2.5">
         <p className="text-xs font-semibold uppercase tracking-wide text-brand">Selected template</p>
         <p className="mt-1 text-sm font-semibold text-foreground">{templateName}</p>
         <p className="mt-1 text-[11px] text-foreground/70">{templateDescription}</p>
       </div>
 
-      <div className="mt-2 rounded-md border border-border/70 bg-background/20 p-3">
+      <div className="mt-2 rounded-md border border-border/70 bg-background/20 p-3 lg:p-2.5">
         <p className="text-[11px] text-foreground/70">Template preview area</p>
       </div>
     </aside>

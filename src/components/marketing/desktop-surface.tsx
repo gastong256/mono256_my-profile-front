@@ -3,9 +3,9 @@ import { WindowFrame } from "@/components/ui/window-frame";
 
 export function DesktopSurface() {
   return (
-    <section className="h-full py-1 md:py-2">
-      <PageContainer className="h-full">
-        <div className="mx-auto flex h-full w-full max-w-[1120px] min-h-0">
+    <section className="py-1 md:h-full md:py-2">
+      <PageContainer className="md:h-full">
+        <div className="mx-auto flex w-full max-w-[1120px] min-h-0 md:h-full">
           <WindowFrame
             title="welcome.cli"
             subtitle="gastong256@dev: ~"
@@ -21,7 +21,7 @@ export function DesktopSurface() {
               ]
             }}
             className="h-full w-full border-white/10 bg-[linear-gradient(180deg,rgba(20,22,35,0.76),rgba(8,10,17,0.88))]"
-            bodyClassName="bg-[linear-gradient(180deg,rgba(10,12,19,0.34),rgba(8,10,16,0.08))] p-4 md:p-7"
+            bodyClassName="bg-[linear-gradient(180deg,rgba(10,12,19,0.34),rgba(8,10,16,0.08))] p-4 md:p-7 lg:p-6"
           >
             <div className="font-mono text-[13px] leading-7 md:text-[15px] md:leading-8">
               <div className="space-y-0">
@@ -36,11 +36,11 @@ export function DesktopSurface() {
                 </div>
               </div>
 
-              <p className="mt-3 md:mt-4">
+              <p className="mt-3 md:mt-4 lg:mt-3.5">
                 <span className="text-[12px] font-medium text-[#88C0D0] md:text-[13px]">gastong256@dev:~$</span>{" "}
                 <span className="text-[12px] font-normal text-[#C7CFDA] md:text-[13px]">cat summary.txt</span>
               </p>
-              <div className="mt-2 space-y-0.5">
+              <div className="mt-2 space-y-0.5 lg:space-y-0.5">
                 <p className="font-sans text-[14px] font-medium leading-[1.35rem] text-[#E6EDF3] md:text-[15px] md:leading-[1.5rem]">
                   Software engineer focused on building reliable systems, clean architectures, and software that holds up in production.
                 </p>
@@ -49,11 +49,11 @@ export function DesktopSurface() {
                 </p>
               </div>
 
-              <p className="mt-3 md:mt-4">
+              <p className="mt-3 md:mt-4 lg:mt-3.5">
                 <span className="text-[12px] font-medium text-[#88C0D0] md:text-[13px]">gastong256@dev:~$</span>{" "}
                 <span className="text-[12px] font-normal text-[#C7CFDA] md:text-[13px]">sysinfo</span>
               </p>
-              <div className="mt-2 space-y-0.5 leading-[1.35rem] md:leading-[1.5rem]">
+              <div className="mt-2 space-y-0.5 leading-[1.35rem] md:leading-[1.5rem] lg:space-y-0.5">
                 <p>
                   <span className="font-semibold text-[#7D8896]">engineer_role....</span>{" "}
                   <span className="font-medium text-[#E6EDF3]">Senior Software Engineer</span>
@@ -76,7 +76,7 @@ export function DesktopSurface() {
                 </p>
               </div>
 
-              <p className="mt-3 md:mt-4">
+              <p className="mt-3 md:mt-4 lg:mt-3.5">
                 <span className="text-[12px] font-medium text-[#88C0D0] md:text-[13px]">gastong256@dev:~$</span>{" "}
                 <span className="text-[12px] font-normal text-[#C7CFDA] md:text-[13px]">ls /product</span>
               </p>
@@ -90,7 +90,7 @@ export function DesktopSurface() {
                   {"   "}github-connected · vercel-ready · 2-click deploy
                 </p>
               </div>
-              <p className="mt-3">
+              <p className="mt-3 lg:mt-3.5">
                 <span className="text-[12px] font-medium text-[#88C0D0] md:text-[13px]">gastong256@dev:~$</span>{" "}
                 <span className="cursor-blink inline-block h-5 w-[4px] rounded-sm bg-[#E6EDF3] align-middle opacity-95" aria-hidden />
               </p>

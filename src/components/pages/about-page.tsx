@@ -71,7 +71,7 @@ export function AboutPage() {
           </div>
         </div>
 
-        <article className="min-h-0 flex-1 overflow-y-auto p-4 md:p-6">
+        <article className="min-h-0 flex-1 p-4 md:overflow-y-auto md:p-6">
           <div className="font-mono text-[13px] leading-6 text-[#A9B4C0] md:text-sm md:leading-7">
             <p className="font-sans text-[17px] font-bold leading-7 text-[#E6EDF3] md:text-[22px] md:leading-8">
               <span className="mr-1 font-mono font-semibold text-[#88C0D0]">#</span>

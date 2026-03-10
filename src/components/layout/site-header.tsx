@@ -1,4 +1,5 @@
 import Link from "next/link";
+import dynamic from "next/dynamic";
 
 import { profileContent } from "@/content/profile";
 
@@ -6,19 +7,24 @@ import { HeaderClock } from "./header-clock";
 import { HeaderShortcuts } from "./header-shortcuts";
 import { PageContainer } from "./page-container";
 
+const HeaderShortcutsMenu = dynamic(
+  () => import("./header-shortcuts-menu").then((module) => module.HeaderShortcutsMenu),
+  { ssr: false }
+);
+
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 shrink-0 bg-background/55 backdrop-blur-md">
       <div className="w-full pt-2 md:pt-3">
         <div className="mx-auto w-[92vw] rounded-2xl border border-interactive-border/80 bg-[linear-gradient(180deg,rgba(16,24,42,0.86),rgba(10,16,30,0.78))] shadow-card md:w-[80vw]">
-          <div className="grid items-center gap-1.5 px-4 py-1.5 md:grid-cols-[1fr_auto_1fr] md:gap-2 md:px-6 md:py-2">
+          <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-1.5 px-4 py-1.5 md:grid-cols-[1fr_auto_1fr] md:gap-2 md:px-6 md:py-2">
             <Link
               href="/"
               title="Gastón Germán Gonzalez | Software Engineer"
-              className="group mx-auto flex min-w-0 items-center justify-center gap-3 md:mx-0 md:justify-start md:gap-3.5"
+              className="group flex min-w-0 items-center justify-start gap-3 md:gap-3.5"
             >
               <BrandIcon />
-              <span className="min-w-0 truncate text-center md:text-left">
+              <span className="min-w-0 truncate text-left">
                 <span className="font-sans text-[12px] font-semibold tracking-[0.01em] text-foreground transition-colors group-hover:text-foreground/95 md:text-[13px]">
                   Gastón Germán Gonzalez
                 </span>
@@ -28,6 +34,10 @@ export function SiteHeader() {
                 </span>
               </span>
             </Link>
+
+            <div className="justify-self-end md:hidden">
+              <HeaderShortcutsMenu />
+            </div>
 
             <div className="hidden md:block">
               <HeaderClock />
@@ -43,7 +53,7 @@ export function SiteHeader() {
         </div>
       </div>
 
-      <PageContainer className="py-2 md:py-2.5">
+      <PageContainer className="hidden py-2 md:block md:py-2.5">
         <div className="mx-auto flex w-full max-w-[1120px] flex-col gap-2 md:gap-2.5">
           <HeaderShortcuts />
         </div>

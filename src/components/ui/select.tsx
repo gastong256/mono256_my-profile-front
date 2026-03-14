@@ -1,9 +1,16 @@
 import type { SelectHTMLAttributes } from "react";
 
-import { focusVisibleRingClass, interactiveFieldClass } from "@/components/ui/foundation";
+import {
+  focusVisibleRingClass,
+  interactiveFieldClass,
+} from "@/components/ui/foundation";
 import { cn } from "@/lib/utils/cn";
 
-export function Select({ className, children, ...props }: SelectHTMLAttributes<HTMLSelectElement>) {
+export function Select({
+  className,
+  children,
+  ...props
+}: SelectHTMLAttributes<HTMLSelectElement>) {
   return (
     <select
       className={cn(

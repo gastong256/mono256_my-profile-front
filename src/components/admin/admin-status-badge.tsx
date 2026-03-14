@@ -1,9 +1,16 @@
 import type { DeliveryStatus, ReviewStatus } from "@/types/api";
-import { statusPillBaseClassName, statusPillClassName } from "@/components/ui/status-pill";
+import {
+  statusPillBaseClassName,
+  statusPillClassName,
+} from "@/components/ui/status-pill";
 import { cn } from "@/lib/utils/cn";
 
 export function ReviewStatusBadge({ value }: { value: ReviewStatus }) {
-  return <span className={reviewStatusClassName(value)}>{value.replace("_", " ")}</span>;
+  return (
+    <span className={reviewStatusClassName(value)}>
+      {value.replace("_", " ")}
+    </span>
+  );
 }
 
 export function DeliveryStatusBadge({ value }: { value: DeliveryStatus }) {
@@ -23,7 +30,10 @@ function reviewStatusClassName(value: ReviewStatus) {
     return statusPillClassName(statusPillBaseClassName, "neutral-soft");
   }
 
-  return cn(statusPillBaseClassName, "border-foreground/20 bg-foreground/8 text-foreground/55");
+  return cn(
+    statusPillBaseClassName,
+    "border-foreground/20 bg-foreground/8 text-foreground/55"
+  );
 }
 
 function deliveryStatusClassName(value: DeliveryStatus) {
@@ -39,5 +49,8 @@ function deliveryStatusClassName(value: DeliveryStatus) {
     return statusPillClassName(statusPillBaseClassName, "neutral-soft");
   }
 
-  return cn(statusPillBaseClassName, "border-[#f0c674]/35 bg-[#f0c674]/10 text-[#f0c674]");
+  return cn(
+    statusPillBaseClassName,
+    "border-[#f0c674]/35 bg-[#f0c674]/10 text-[#f0c674]"
+  );
 }

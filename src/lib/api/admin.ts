@@ -4,7 +4,7 @@ import type {
   ContactSubmissionListQuery,
   ContactSubmissionListResponse,
   UpdateSubmissionReviewStatusRequest,
-  UpdateSubmissionReviewStatusResponse
+  UpdateSubmissionReviewStatusResponse,
 } from "@/types/api";
 
 function buildQueryString(query: ContactSubmissionListQuery): string {
@@ -30,20 +30,29 @@ function buildQueryString(query: ContactSubmissionListQuery): string {
   return queryString ? `?${queryString}` : "";
 }
 
-export function listContactSubmissions(authToken: string, query: ContactSubmissionListQuery) {
-  return apiClient<ContactSubmissionListResponse>(`/admin/contact-submissions${buildQueryString(query)}`, {
-    method: "GET",
-    cache: "no-store",
-    authToken
-  });
+export function listContactSubmissions(
+  authToken: string,
+  query: ContactSubmissionListQuery
+) {
+  return apiClient<ContactSubmissionListResponse>(
+    `/admin/contact-submissions${buildQueryString(query)}`,
+    {
+      method: "GET",
+      cache: "no-store",
+      authToken,
+    }
+  );
 }
 
 export function getContactSubmission(authToken: string, submissionId: string) {
-  return apiClient<ContactSubmissionDetailResponse>(`/admin/contact-submissions/${submissionId}`, {
-    method: "GET",
-    cache: "no-store",
-    authToken
-  });
+  return apiClient<ContactSubmissionDetailResponse>(
+    `/admin/contact-submissions/${submissionId}`,
+    {
+      method: "GET",
+      cache: "no-store",
+      authToken,
+    }
+  );
 }
 
 export function updateContactSubmissionReviewStatus(
@@ -51,12 +60,12 @@ export function updateContactSubmissionReviewStatus(
   submissionId: string,
   payload: UpdateSubmissionReviewStatusRequest
 ) {
-  return apiClient<UpdateSubmissionReviewStatusResponse, UpdateSubmissionReviewStatusRequest>(
-    `/admin/contact-submissions/${submissionId}`,
-    {
-      method: "PATCH",
-      body: payload,
-      authToken
-    }
-  );
+  return apiClient<
+    UpdateSubmissionReviewStatusResponse,
+    UpdateSubmissionReviewStatusRequest
+  >(`/admin/contact-submissions/${submissionId}`, {
+    method: "PATCH",
+    body: payload,
+    authToken,
+  });
 }

@@ -2,7 +2,10 @@ import type { LoginResponse } from "@/types/api";
 
 export const ADMIN_SESSION_STORAGE_KEY = "mono256.admin.session";
 
-export type StoredAdminSession = Pick<LoginResponse, "accessToken" | "tokenType" | "expiresIn" | "user">;
+export type StoredAdminSession = Pick<
+  LoginResponse,
+  "accessToken" | "tokenType" | "expiresIn" | "user"
+>;
 
 export function readStoredAdminSession(): StoredAdminSession | null {
   if (typeof window === "undefined") {
@@ -28,7 +31,10 @@ export function writeStoredAdminSession(session: StoredAdminSession) {
     return;
   }
 
-  window.localStorage.setItem(ADMIN_SESSION_STORAGE_KEY, JSON.stringify(session));
+  window.localStorage.setItem(
+    ADMIN_SESSION_STORAGE_KEY,
+    JSON.stringify(session)
+  );
 }
 
 export function clearStoredAdminSession() {

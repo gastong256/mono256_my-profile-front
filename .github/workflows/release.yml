@@ -1,56 +1,40 @@
 name: Release
 
 on:
-  push:
+  workflow_run:
+    workflows: ["CI"]
     branches: ["main"]
+    types:
+      - completed
 
 permissions:
   contents: write
 
 jobs:
   release:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
+          ref: main
           fetch-depth: 0
 
-      - name: Read version from package.json
-        id: version
-        run: |
-          VERSION="$(node -p "require('./package.json').version")"
-          TAG="v${VERSION}"
-          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
-          echo "tag=${TAG}" >> "$GITHUB_OUTPUT"
-          echo "Version: ${VERSION}"
-          echo "Tag: ${TAG}"
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
 
-      - name: Check if tag already exists
-        id: tag_check
-        run: |
-          if git ls-remote --exit-code --tags origin "refs/tags/${{ steps.version.outputs.tag }}" >/dev/null 2>&1; then
-            echo "exists=true" >> "$GITHUB_OUTPUT"
-            echo "Tag ${{ steps.version.outputs.tag }} already exists. Nothing to release."
-          else
-            echo "exists=false" >> "$GITHUB_OUTPUT"
-            echo "Tag ${{ steps.version.outputs.tag }} does not exist. Proceeding with release."
-          fi
+      - name: Setup Node.js (LTS)
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: pnpm
 
-      - name: Create and push tag
-        if: steps.tag_check.outputs.exists == 'false'
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git tag "${{ steps.version.outputs.tag }}"
-          git push origin "${{ steps.version.outputs.tag }}"
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
-      - name: Create GitHub Release
-        if: steps.tag_check.outputs.exists == 'false'
+      - name: Run semantic-release
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh release create "${{ steps.version.outputs.tag }}" \
-            --title "${{ steps.version.outputs.tag }}" \
-            --generate-notes
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: pnpm exec semantic-release

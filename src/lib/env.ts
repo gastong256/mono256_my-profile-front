@@ -1,4 +1,7 @@
-type PublicEnvKey = "NEXT_PUBLIC_SITE_URL" | "NEXT_PUBLIC_API_BASE_URL" | "NEXT_PUBLIC_API_URL";
+type PublicEnvKey =
+  | "NEXT_PUBLIC_SITE_URL"
+  | "NEXT_PUBLIC_API_BASE_URL"
+  | "NEXT_PUBLIC_API_URL";
 
 function readEnv(keys: PublicEnvKey[], fallback: string): string {
   for (const key of keys) {
@@ -14,5 +17,8 @@ function readEnv(keys: PublicEnvKey[], fallback: string): string {
 
 export const env = {
   siteUrl: readEnv(["NEXT_PUBLIC_SITE_URL"], "http://localhost:3000"),
-  apiBaseUrl: readEnv(["NEXT_PUBLIC_API_BASE_URL", "NEXT_PUBLIC_API_URL"], "http://localhost:4000")
+  apiBaseUrl: readEnv(
+    ["NEXT_PUBLIC_API_BASE_URL", "NEXT_PUBLIC_API_URL"],
+    "http://localhost:4000"
+  ),
 };

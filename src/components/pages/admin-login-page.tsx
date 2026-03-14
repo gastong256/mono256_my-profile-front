@@ -32,7 +32,9 @@ export function AdminLoginPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const requestedNextPath = searchParams.get("next");
-  const nextPath = requestedNextPath?.startsWith("/admin") ? requestedNextPath : "/admin";
+  const nextPath = requestedNextPath?.startsWith("/admin")
+    ? requestedNextPath
+    : "/admin";
   const { login, status } = useAdminAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -53,7 +55,7 @@ export function AdminLoginPage() {
     try {
       await login({
         email: email.trim(),
-        password
+        password,
       });
       router.replace(nextPath);
     } catch (error) {
@@ -72,20 +74,30 @@ export function AdminLoginPage() {
       help={{
         section: "Admin Login",
         path: "~/admin/login",
-        items: ["Authenticate with backend credentials to open the private submissions dashboard."]
+        items: [
+          "Authenticate with backend credentials to open the private submissions dashboard.",
+        ],
       }}
     >
       <section className="flex min-h-[640px] items-center justify-center bg-[linear-gradient(180deg,#18243b_0%,#1c3456_30%,#2f4f73_100%)] p-6">
         <div className="w-full max-w-md rounded-2xl border border-border/80 bg-surface/95 p-6 shadow-card">
-          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-foreground/55">Private route</p>
-          <h1 className="mt-2 text-2xl font-semibold tracking-tight text-foreground">Admin access</h1>
+          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-foreground/55">
+            Private route
+          </p>
+          <h1 className="mt-2 text-2xl font-semibold tracking-tight text-foreground">
+            Admin access
+          </h1>
           <p className="mt-2 text-sm text-foreground/72">
-            Sign in with backend admin credentials. This route is intentionally hidden from public navigation.
+            Sign in with backend admin credentials. This route is intentionally
+            hidden from public navigation.
           </p>
 
           <form className="mt-5 space-y-4" onSubmit={handleSubmit}>
             <div>
-              <label htmlFor="email" className="mb-2 block text-sm font-medium text-foreground/88">
+              <label
+                htmlFor="email"
+                className="mb-2 block text-sm font-medium text-foreground/88"
+              >
                 Email
               </label>
               <Input
@@ -101,7 +113,10 @@ export function AdminLoginPage() {
             </div>
 
             <div>
-              <label htmlFor="password" className="mb-2 block text-sm font-medium text-foreground/88">
+              <label
+                htmlFor="password"
+                className="mb-2 block text-sm font-medium text-foreground/88"
+              >
                 Password
               </label>
               <Input
@@ -115,12 +130,23 @@ export function AdminLoginPage() {
               />
             </div>
 
-            <div aria-live="polite" className="min-h-5 text-sm font-medium text-[#f0c674]">
+            <div
+              aria-live="polite"
+              className="min-h-5 text-sm font-medium text-[#f0c674]"
+            >
               {errorMessage}
             </div>
 
-            <Button type="submit" className="w-full" disabled={isSubmitting || status === "loading"}>
-              {isSubmitting ? "Signing in..." : status === "loading" ? "Checking session..." : "Sign in"}
+            <Button
+              type="submit"
+              className="w-full"
+              disabled={isSubmitting || status === "loading"}
+            >
+              {isSubmitting
+                ? "Signing in..."
+                : status === "loading"
+                  ? "Checking session..."
+                  : "Sign in"}
             </Button>
           </form>
         </div>

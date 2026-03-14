@@ -6,7 +6,12 @@ export class ApiError extends Error {
   code: ApiErrorCode;
   details: unknown;
 
-  constructor(message: string, status: number, code: ApiErrorCode, details?: unknown) {
+  constructor(
+    message: string,
+    status: number,
+    code: ApiErrorCode,
+    details?: unknown
+  ) {
     super(message);
     this.name = "ApiError";
     this.status = status;
@@ -19,7 +24,10 @@ function normalizeApiPath(path: string): string {
   return path.startsWith("/") ? path : `/${path}`;
 }
 
-function resolveCachePolicy(method: ApiMethod, cache?: RequestCache): RequestCache {
+function resolveCachePolicy(
+  method: ApiMethod,
+  cache?: RequestCache
+): RequestCache {
   if (cache) {
     return cache;
   }
@@ -102,7 +110,10 @@ function defaultErrorMessage(status: number): string {
   return "Something went wrong while communicating with the API.";
 }
 
-export function getApiErrorMessage(error: unknown, fallback = "Something went wrong. Please try again."): string {
+export function getApiErrorMessage(
+  error: unknown,
+  fallback = "Something went wrong. Please try again."
+): string {
   if (error instanceof ApiError) {
     return error.message;
   }
@@ -118,7 +129,15 @@ export async function apiClient<TResponse = unknown, TBody = unknown>(
   path: string,
   options: ApiClientOptions<TBody> = {}
 ): Promise<TResponse> {
-  const { method = "GET", body, headers = {}, cache, revalidate, authToken, signal } = options;
+  const {
+    method = "GET",
+    body,
+    headers = {},
+    cache,
+    revalidate,
+    authToken,
+    signal,
+  } = options;
   const resolvedPath = normalizeApiPath(path);
   const isGetMethod = method === "GET";
   const resolvedCache = resolveCachePolicy(method, cache);
@@ -128,17 +147,24 @@ export async function apiClient<TResponse = unknown, TBody = unknown>(
     headers: {
       ...(body ? { "Content-Type": "application/json" } : {}),
       ...(authToken ? { Authorization: `Bearer ${authToken}` } : {}),
-      ...headers
+      ...headers,
     },
     body: body ? JSON.stringify(body) : undefined,
     cache: resolvedCache,
-    ...(isGetMethod && revalidate !== undefined ? { next: { revalidate } } : {}),
-    signal
+    ...(isGetMethod && revalidate !== undefined
+      ? { next: { revalidate } }
+      : {}),
+    signal,
   });
 
   if (!response.ok) {
     const errorPayload = await readErrorPayload(response);
-    throw new ApiError(defaultErrorMessage(response.status), response.status, mapStatusToCode(response.status), errorPayload);
+    throw new ApiError(
+      defaultErrorMessage(response.status),
+      response.status,
+      mapStatusToCode(response.status),
+      errorPayload
+    );
   }
 
   if (response.status === 204) {

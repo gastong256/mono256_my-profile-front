@@ -4,9 +4,16 @@ import { FormEvent, useState } from "react";
 
 import { ExternalLink } from "@/components/shared/primitives/external-link";
 import { siteContent } from "@/content/site";
-import { EmailIcon, GitHubIcon, LinkedInIcon } from "@/components/shared/icons/social-icons";
+import {
+  EmailIcon,
+  GitHubIcon,
+  LinkedInIcon,
+} from "@/components/shared/icons/social-icons";
 import { WindowPageShell } from "@/components/shared/window/window-page-shell";
-import { windowBodyResetClass, windowScrollContainerClass } from "@/components/shared/window/foundation";
+import {
+  windowBodyResetClass,
+  windowScrollContainerClass,
+} from "@/components/shared/window/foundation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -38,7 +45,7 @@ const initialFormState: ContactFormState = {
   email: "",
   subject: "",
   message: "",
-  website: ""
+  website: "",
 };
 
 function buildContactErrorMessage(error: unknown): string {
@@ -60,7 +67,8 @@ function buildContactErrorMessage(error: unknown): string {
 }
 
 export function ContactPage() {
-  const [formState, setFormState] = useState<ContactFormState>(initialFormState);
+  const [formState, setFormState] =
+    useState<ContactFormState>(initialFormState);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [feedback, setFeedback] = useState<SubmissionFeedback>(null);
 
@@ -78,18 +86,18 @@ export function ContactPage() {
         subject: formState.subject.trim(),
         message: formState.message.trim(),
         website: formState.website,
-        ...(captchaToken ? { captchaToken } : {})
+        ...(captchaToken ? { captchaToken } : {}),
       });
 
       setFormState(initialFormState);
       setFeedback({
         tone: "success",
-        message: response.message
+        message: response.message,
       });
     } catch (error) {
       setFeedback({
         tone: "error",
-        message: buildContactErrorMessage(error)
+        message: buildContactErrorMessage(error),
       });
     } finally {
       setIsSubmitting(false);
@@ -106,8 +114,8 @@ export function ContactPage() {
         path: "~/Contact.form",
         items: [
           "Use the form fields to prepare your message.",
-          "Use direct email for immediate outreach."
-        ]
+          "Use direct email for immediate outreach.",
+        ],
       }}
     >
       <section
@@ -117,27 +125,39 @@ export function ContactPage() {
           <header className="overflow-hidden rounded-xl border border-border/90 bg-surface shadow-card">
             <div className="h-1 w-full bg-brand/85" aria-hidden />
             <div className="p-4 md:p-5 lg:p-4">
-              <h2 className="text-xl font-semibold tracking-tight md:text-2xl">Reach me directly</h2>
+              <h2 className="text-xl font-semibold tracking-tight md:text-2xl">
+                Reach me directly
+              </h2>
               <p className="mt-1.5 text-sm text-foreground/75">
-                Available for consulting in backend systems, architecture, and product engineering.
+                Available for consulting in backend systems, architecture, and
+                product engineering.
               </p>
 
               <ul className="mt-3 grid grid-cols-1 gap-y-2 text-sm text-foreground/80 sm:grid-cols-3 sm:gap-x-4 lg:mt-2.5">
                 <li className="inline-flex items-center justify-center gap-2">
                   <EmailIcon className="h-4 w-4 shrink-0" />
-                  <ExternalLink href={`mailto:${siteContent.contactEmail}`} className="font-medium text-foreground/85 hover:text-foreground">
+                  <ExternalLink
+                    href={`mailto:${siteContent.contactEmail}`}
+                    className="font-medium text-foreground/85 hover:text-foreground"
+                  >
                     {siteContent.contactEmail}
                   </ExternalLink>
                 </li>
                 <li className="inline-flex items-center justify-center gap-2">
                   <LinkedInIcon className="h-4 w-4 shrink-0" />
-                  <ExternalLink href={siteContent.linkedin} className="font-medium text-foreground/85 hover:text-foreground">
+                  <ExternalLink
+                    href={siteContent.linkedin}
+                    className="font-medium text-foreground/85 hover:text-foreground"
+                  >
                     gastongonzalez256
                   </ExternalLink>
                 </li>
                 <li className="inline-flex items-center justify-center gap-2">
                   <GitHubIcon className="h-4 w-4 shrink-0" />
-                  <ExternalLink href={siteContent.github} className="font-medium text-foreground/85 hover:text-foreground">
+                  <ExternalLink
+                    href={siteContent.github}
+                    className="font-medium text-foreground/85 hover:text-foreground"
+                  >
                     gastong256
                   </ExternalLink>
                 </li>
@@ -145,23 +165,38 @@ export function ContactPage() {
             </div>
           </header>
 
-          <form className="flex min-h-0 flex-1 flex-col rounded-xl border border-border/90 bg-surface p-4 shadow-card md:p-5 lg:p-4" onSubmit={handleSubmit}>
+          <form
+            className="flex min-h-0 flex-1 flex-col rounded-xl border border-border/90 bg-surface p-4 shadow-card md:p-5 lg:p-4"
+            onSubmit={handleSubmit}
+          >
             <div className="mb-3">
-              <h3 className="text-lg font-semibold tracking-tight md:text-xl">Contact form</h3>
-              <p className="mt-1 text-sm text-foreground/72">Project context, constraints, and timing help me respond faster.</p>
+              <h3 className="text-lg font-semibold tracking-tight md:text-xl">
+                Contact form
+              </h3>
+              <p className="mt-1 text-sm text-foreground/72">
+                Project context, constraints, and timing help me respond faster.
+              </p>
             </div>
 
             <div className="flex-1 space-y-2.5 lg:space-y-2">
               <div className="grid gap-3 md:grid-cols-2 lg:gap-2.5">
                 <div>
-                  <label htmlFor="name" className="mb-2 block text-sm font-medium text-foreground/88 lg:mb-1.5">
+                  <label
+                    htmlFor="name"
+                    className="mb-2 block text-sm font-medium text-foreground/88 lg:mb-1.5"
+                  >
                     Name
                   </label>
                   <Input
                     id="name"
                     name="name"
                     value={formState.name}
-                    onChange={(event) => setFormState((current) => ({ ...current, name: event.target.value }))}
+                    onChange={(event) =>
+                      setFormState((current) => ({
+                        ...current,
+                        name: event.target.value,
+                      }))
+                    }
                     placeholder="Your name"
                     minLength={2}
                     maxLength={120}
@@ -171,7 +206,10 @@ export function ContactPage() {
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="mb-2 block text-sm font-medium text-foreground/88 lg:mb-1.5">
+                  <label
+                    htmlFor="email"
+                    className="mb-2 block text-sm font-medium text-foreground/88 lg:mb-1.5"
+                  >
                     Email
                   </label>
                   <Input
@@ -179,7 +217,12 @@ export function ContactPage() {
                     name="email"
                     type="email"
                     value={formState.email}
-                    onChange={(event) => setFormState((current) => ({ ...current, email: event.target.value }))}
+                    onChange={(event) =>
+                      setFormState((current) => ({
+                        ...current,
+                        email: event.target.value,
+                      }))
+                    }
                     placeholder="you@example.com"
                     maxLength={320}
                     required
@@ -189,14 +232,22 @@ export function ContactPage() {
               </div>
 
               <div>
-                <label htmlFor="subject" className="mb-2 block text-sm font-medium text-foreground/88 lg:mb-1.5">
+                <label
+                  htmlFor="subject"
+                  className="mb-2 block text-sm font-medium text-foreground/88 lg:mb-1.5"
+                >
                   Subject
                 </label>
                 <Input
                   id="subject"
                   name="subject"
                   value={formState.subject}
-                  onChange={(event) => setFormState((current) => ({ ...current, subject: event.target.value }))}
+                  onChange={(event) =>
+                    setFormState((current) => ({
+                      ...current,
+                      subject: event.target.value,
+                    }))
+                  }
                   placeholder="Backend architecture consulting"
                   minLength={2}
                   maxLength={140}
@@ -206,14 +257,22 @@ export function ContactPage() {
               </div>
 
               <div>
-                <label htmlFor="message" className="mb-2 block text-sm font-medium text-foreground/88 lg:mb-1.5">
+                <label
+                  htmlFor="message"
+                  className="mb-2 block text-sm font-medium text-foreground/88 lg:mb-1.5"
+                >
                   Message
                 </label>
                 <Textarea
                   id="message"
                   name="message"
                   value={formState.message}
-                  onChange={(event) => setFormState((current) => ({ ...current, message: event.target.value }))}
+                  onChange={(event) =>
+                    setFormState((current) => ({
+                      ...current,
+                      message: event.target.value,
+                    }))
+                  }
                   placeholder="Share your context, constraints, goals, and expected timeline."
                   minLength={1}
                   maxLength={2000}
@@ -230,7 +289,12 @@ export function ContactPage() {
                   tabIndex={-1}
                   autoComplete="off"
                   value={formState.website}
-                  onChange={(event) => setFormState((current) => ({ ...current, website: event.target.value }))}
+                  onChange={(event) =>
+                    setFormState((current) => ({
+                      ...current,
+                      website: event.target.value,
+                    }))
+                  }
                 />
               </div>
             </div>
@@ -250,7 +314,11 @@ export function ContactPage() {
                 ) : null}
               </div>
 
-              <Button type="submit" className="w-full md:w-auto" disabled={isSubmitting}>
+              <Button
+                type="submit"
+                className="w-full md:w-auto"
+                disabled={isSubmitting}
+              >
                 {isSubmitting ? "Sending..." : "Send message"}
               </Button>
             </div>

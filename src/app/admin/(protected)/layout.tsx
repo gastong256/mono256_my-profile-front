@@ -4,7 +4,7 @@ import { AdminAuthGuard } from "@/components/admin/admin-auth-guard";
 import { AdminRouteFallback } from "@/components/admin/admin-route-fallback";
 
 export default function AdminProtectedLayout({
-  children
+  children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {

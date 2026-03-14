@@ -5,7 +5,10 @@ import { useEffect, useState, useTransition } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { AdminPageShell } from "@/components/admin/admin-page-shell";
-import { DeliveryStatusBadge, ReviewStatusBadge } from "@/components/admin/admin-status-badge";
+import {
+  DeliveryStatusBadge,
+  ReviewStatusBadge,
+} from "@/components/admin/admin-status-badge";
 import { useAdminAuth } from "@/components/admin/admin-auth-provider";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Select } from "@/components/ui/select";
@@ -16,13 +19,15 @@ import type {
   ContactSubmissionListResponse,
   ContactSubmissionListQuery,
   DeliveryStatus,
-  ReviewStatus
+  ReviewStatus,
 } from "@/types/api";
 import { deliveryStatusOptions, reviewStatusOptions } from "@/types/api";
 
 function readPageParam(value: string | null, fallback: number) {
   const parsedValue = Number(value);
-  return Number.isInteger(parsedValue) && parsedValue >= 1 ? parsedValue : fallback;
+  return Number.isInteger(parsedValue) && parsedValue >= 1
+    ? parsedValue
+    : fallback;
 }
 
 function readPageSizeParam(value: string | null, fallback: number) {
@@ -89,13 +94,15 @@ export function AdminPage() {
   const page = readPageParam(searchParams.get("page"), 1);
   const pageSize = readPageSizeParam(searchParams.get("pageSize"), 20);
   const reviewStatus = parseReviewStatus(searchParams.get("reviewStatus"));
-  const deliveryStatus = parseDeliveryStatus(searchParams.get("deliveryStatus"));
+  const deliveryStatus = parseDeliveryStatus(
+    searchParams.get("deliveryStatus")
+  );
 
   const query: ContactSubmissionListQuery = {
     page,
     pageSize,
     reviewStatus,
-    deliveryStatus
+    deliveryStatus,
   };
 
   useEffect(() => {
@@ -115,7 +122,7 @@ export function AdminPage() {
           page,
           pageSize,
           reviewStatus,
-          deliveryStatus
+          deliveryStatus,
         });
 
         if (abortController.signal.aborted) {
@@ -166,7 +173,10 @@ export function AdminPage() {
       <section className="rounded-xl border border-border/80 bg-surface/95 p-4 shadow-card">
         <div className="grid gap-3 md:grid-cols-4">
           <div>
-            <label htmlFor="reviewStatus" className="mb-2 block text-sm font-medium text-foreground/88">
+            <label
+              htmlFor="reviewStatus"
+              className="mb-2 block text-sm font-medium text-foreground/88"
+            >
               Review status
             </label>
             <Select
@@ -176,7 +186,7 @@ export function AdminPage() {
                 updateQuery({
                   ...query,
                   page: 1,
-                  reviewStatus: parseReviewStatus(event.target.value || null)
+                  reviewStatus: parseReviewStatus(event.target.value || null),
                 })
               }
               disabled={isNavigating}
@@ -191,7 +201,10 @@ export function AdminPage() {
           </div>
 
           <div>
-            <label htmlFor="deliveryStatus" className="mb-2 block text-sm font-medium text-foreground/88">
+            <label
+              htmlFor="deliveryStatus"
+              className="mb-2 block text-sm font-medium text-foreground/88"
+            >
               Delivery status
             </label>
             <Select
@@ -201,7 +214,9 @@ export function AdminPage() {
                 updateQuery({
                   ...query,
                   page: 1,
-                  deliveryStatus: parseDeliveryStatus(event.target.value || null)
+                  deliveryStatus: parseDeliveryStatus(
+                    event.target.value || null
+                  ),
                 })
               }
               disabled={isNavigating}
@@ -216,7 +231,10 @@ export function AdminPage() {
           </div>
 
           <div>
-            <label htmlFor="pageSize" className="mb-2 block text-sm font-medium text-foreground/88">
+            <label
+              htmlFor="pageSize"
+              className="mb-2 block text-sm font-medium text-foreground/88"
+            >
               Page size
             </label>
             <Select
@@ -226,7 +244,7 @@ export function AdminPage() {
                 updateQuery({
                   ...query,
                   page: 1,
-                  pageSize: readPageSizeParam(event.target.value, 20)
+                  pageSize: readPageSizeParam(event.target.value, 20),
                 })
               }
               disabled={isNavigating}
@@ -247,7 +265,7 @@ export function AdminPage() {
               onClick={() =>
                 updateQuery({
                   page: 1,
-                  pageSize: 20
+                  pageSize: 20,
                 })
               }
               disabled={isNavigating}
@@ -260,9 +278,15 @@ export function AdminPage() {
         <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-border/70 pt-4">
           <div>
             <p className="text-sm font-medium text-foreground">
-              {pagination ? `${pagination.total} total submissions` : isLoading ? "Loading submissions..." : "No data"}
+              {pagination
+                ? `${pagination.total} total submissions`
+                : isLoading
+                  ? "Loading submissions..."
+                  : "No data"}
             </p>
-            <p className="text-xs text-foreground/65">Page {query.page} with backend-driven filtering and pagination.</p>
+            <p className="text-xs text-foreground/65">
+              Page {query.page} with backend-driven filtering and pagination.
+            </p>
           </div>
           {pagination ? (
             <p className="text-xs font-mono uppercase tracking-wide text-foreground/55">
@@ -275,19 +299,27 @@ export function AdminPage() {
       <section className="rounded-xl border border-border/80 bg-surface/95 shadow-card">
         <div className="border-b border-border/70 px-4 py-3">
           <p className="text-sm font-semibold text-foreground">Inbox</p>
-          <p className="text-xs text-foreground/65">Open a submission to view the full message and update review status.</p>
+          <p className="text-xs text-foreground/65">
+            Open a submission to view the full message and update review status.
+          </p>
         </div>
 
         {errorMessage ? (
-          <div className="px-4 py-6 text-sm font-medium text-[#f0c674]">{errorMessage}</div>
+          <div className="px-4 py-6 text-sm font-medium text-[#f0c674]">
+            {errorMessage}
+          </div>
         ) : null}
 
         {!errorMessage && isLoading ? (
-          <div className="px-4 py-10 text-sm text-foreground/70">Loading submissions...</div>
+          <div className="px-4 py-10 text-sm text-foreground/70">
+            Loading submissions...
+          </div>
         ) : null}
 
         {!errorMessage && !isLoading && data && data.items.length === 0 ? (
-          <div className="px-4 py-10 text-sm text-foreground/70">No submissions match the current filters.</div>
+          <div className="px-4 py-10 text-sm text-foreground/70">
+            No submissions match the current filters.
+          </div>
         ) : null}
 
         {!errorMessage && data && data.items.length > 0 ? (
@@ -306,13 +338,24 @@ export function AdminPage() {
                 </thead>
                 <tbody>
                   {data.items.map((item) => (
-                    <tr key={item.id} className="border-t border-border/70 align-top">
+                    <tr
+                      key={item.id}
+                      className="border-t border-border/70 align-top"
+                    >
                       <td className="px-4 py-3">
-                        <p className="font-medium text-foreground">{item.name}</p>
-                        <p className="text-xs text-foreground/65">{item.email}</p>
-                        <p className="mt-1 text-xs text-foreground/75">{item.subject}</p>
+                        <p className="font-medium text-foreground">
+                          {item.name}
+                        </p>
+                        <p className="text-xs text-foreground/65">
+                          {item.email}
+                        </p>
+                        <p className="mt-1 text-xs text-foreground/75">
+                          {item.subject}
+                        </p>
                       </td>
-                      <td className="px-4 py-3 text-foreground/75">{item.messagePreview}</td>
+                      <td className="px-4 py-3 text-foreground/75">
+                        {item.messagePreview}
+                      </td>
                       <td className="px-4 py-3">
                         <div className="flex flex-col gap-2">
                           <ReviewStatusBadge value={item.reviewStatus} />
@@ -321,14 +364,25 @@ export function AdminPage() {
                       </td>
                       <td className="px-4 py-3 text-foreground/75">
                         <p>{item.deliveryAttempts}</p>
-                        <p className="mt-1 text-xs text-foreground/60">Updated {formatDateTime(item.updatedAt)}</p>
+                        <p className="mt-1 text-xs text-foreground/60">
+                          Updated {formatDateTime(item.updatedAt)}
+                        </p>
                       </td>
                       <td className="px-4 py-3 text-xs text-foreground/70">
                         <p>{formatDateTime(item.createdAt)}</p>
-                        <p className="mt-1">Last attempt {formatDateTime(item.lastDeliveryAttemptAt)}</p>
+                        <p className="mt-1">
+                          Last attempt{" "}
+                          {formatDateTime(item.lastDeliveryAttemptAt)}
+                        </p>
                       </td>
                       <td className="px-4 py-3">
-                        <Link href={`/admin/submissions/${item.id}`} className={buttonVariants({ variant: "secondary", size: "sm" })}>
+                        <Link
+                          href={`/admin/submissions/${item.id}`}
+                          className={buttonVariants({
+                            variant: "secondary",
+                            size: "sm",
+                          })}
+                        >
                           Open
                         </Link>
                       </td>
@@ -340,18 +394,33 @@ export function AdminPage() {
 
             <div className="space-y-3 p-4 md:hidden">
               {data.items.map((item) => (
-                <article key={item.id} className="rounded-xl border border-border/70 bg-background/20 p-4">
+                <article
+                  key={item.id}
+                  className="rounded-xl border border-border/70 bg-background/20 p-4"
+                >
                   <div className="flex items-start justify-between gap-3">
                     <div>
-                      <p className="font-semibold text-foreground">{item.name}</p>
+                      <p className="font-semibold text-foreground">
+                        {item.name}
+                      </p>
                       <p className="text-xs text-foreground/65">{item.email}</p>
                     </div>
-                    <Link href={`/admin/submissions/${item.id}`} className={buttonVariants({ variant: "secondary", size: "sm" })}>
+                    <Link
+                      href={`/admin/submissions/${item.id}`}
+                      className={buttonVariants({
+                        variant: "secondary",
+                        size: "sm",
+                      })}
+                    >
                       Open
                     </Link>
                   </div>
-                  <p className="mt-2 text-sm text-foreground/85">{item.subject}</p>
-                  <p className="mt-2 text-sm text-foreground/70">{item.messagePreview}</p>
+                  <p className="mt-2 text-sm text-foreground/85">
+                    {item.subject}
+                  </p>
+                  <p className="mt-2 text-sm text-foreground/70">
+                    {item.messagePreview}
+                  </p>
                   <div className="mt-3 flex flex-wrap gap-2">
                     <ReviewStatusBadge value={item.reviewStatus} />
                     <DeliveryStatusBadge value={item.deliveryStatus} />
@@ -368,7 +437,9 @@ export function AdminPage() {
 
         <div className="flex flex-wrap items-center justify-between gap-3 border-t border-border/70 px-4 py-3">
           <p className="text-xs text-foreground/65">
-            {pagination ? `Page ${pagination.page} of ${pagination.totalPages}` : "Pagination unavailable until results load."}
+            {pagination
+              ? `Page ${pagination.page} of ${pagination.totalPages}`
+              : "Pagination unavailable until results load."}
           </p>
           <div className="flex items-center gap-2">
             <Button
@@ -379,7 +450,7 @@ export function AdminPage() {
               onClick={() =>
                 updateQuery({
                   ...query,
-                  page: Math.max((query.page ?? 1) - 1, 1)
+                  page: Math.max((query.page ?? 1) - 1, 1),
                 })
               }
             >
@@ -388,11 +459,18 @@ export function AdminPage() {
             <Button
               type="button"
               size="sm"
-              disabled={!pagination || pagination.page >= pagination.totalPages || isNavigating}
+              disabled={
+                !pagination ||
+                pagination.page >= pagination.totalPages ||
+                isNavigating
+              }
               onClick={() =>
                 updateQuery({
                   ...query,
-                  page: Math.min((query.page ?? 1) + 1, pagination?.totalPages ?? query.page ?? 1)
+                  page: Math.min(
+                    (query.page ?? 1) + 1,
+                    pagination?.totalPages ?? query.page ?? 1
+                  ),
                 })
               }
             >

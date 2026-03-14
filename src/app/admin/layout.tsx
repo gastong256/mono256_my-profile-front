@@ -6,12 +6,12 @@ export const metadata: Metadata = {
   title: "Admin",
   robots: {
     index: false,
-    follow: false
-  }
+    follow: false,
+  },
 };
 
 export default function AdminLayout({
-  children
+  children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {

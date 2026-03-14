@@ -6,12 +6,12 @@ export const metadata: Metadata = {
   title: "Submission Detail",
   robots: {
     index: false,
-    follow: false
-  }
+    follow: false,
+  },
 };
 
 export default function AdminSubmissionRoutePage({
-  params
+  params,
 }: Readonly<{
   params: {
     id: string;

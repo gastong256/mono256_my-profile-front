@@ -59,10 +59,20 @@ export type MeResponse = {
   user: AuthUser;
 };
 
-export const reviewStatusOptions = ["NEW", "IN_REVIEW", "RESOLVED", "SPAM"] as const;
+export const reviewStatusOptions = [
+  "NEW",
+  "IN_REVIEW",
+  "RESOLVED",
+  "SPAM",
+] as const;
 export type ReviewStatus = (typeof reviewStatusOptions)[number];
 
-export const deliveryStatusOptions = ["PENDING", "SENT", "FAILED", "SKIPPED"] as const;
+export const deliveryStatusOptions = [
+  "PENDING",
+  "SENT",
+  "FAILED",
+  "SKIPPED",
+] as const;
 export type DeliveryStatus = (typeof deliveryStatusOptions)[number];
 
 export type ContactSubmissionListItem = {
@@ -124,5 +134,8 @@ export type UpdateSubmissionReviewStatusRequest = {
 };
 
 export type UpdateSubmissionReviewStatusResponse = {
-  submission: Pick<ContactSubmissionDetail, "id" | "reviewStatus" | "updatedAt">;
+  submission: Pick<
+    ContactSubmissionDetail,
+    "id" | "reviewStatus" | "updatedAt"
+  >;
 };

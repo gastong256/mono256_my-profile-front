@@ -3,7 +3,11 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
 import { fetchCurrentAdminUser, loginAdmin } from "@/lib/api/auth";
-import { clearStoredAdminSession, readStoredAdminSession, writeStoredAdminSession } from "@/lib/admin/session";
+import {
+  clearStoredAdminSession,
+  readStoredAdminSession,
+  writeStoredAdminSession,
+} from "@/lib/admin/session";
 import type { AuthUser, LoginRequest, LoginResponse } from "@/types/api";
 
 type AdminAuthStatus = "loading" | "authenticated" | "unauthenticated";
@@ -23,7 +27,7 @@ function getSessionState() {
   return {
     status: "unauthenticated" as const,
     user: null,
-    accessToken: null
+    accessToken: null,
   };
 }
 
@@ -83,7 +87,7 @@ export function AdminAuthProvider({ children }: { children: React.ReactNode }) {
       accessToken: response.accessToken,
       tokenType: response.tokenType,
       expiresIn: response.expiresIn,
-      user: response.user
+      user: response.user,
     });
     setUser(response.user);
     setAccessToken(response.accessToken);
@@ -122,7 +126,7 @@ export function AdminAuthProvider({ children }: { children: React.ReactNode }) {
         accessToken,
         login,
         logout,
-        refresh
+        refresh,
       }}
     >
       {children}

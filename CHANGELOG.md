@@ -1,3 +1,9 @@
+## [0.2.3](https://github.com/gastong256/mono256_my-profile-front/compare/v0.2.2...v0.2.3) (2026-03-14)
+
+### Bug Fixes
+
+- use static public env access for client-safe next builds ([fd514aa](https://github.com/gastong256/mono256_my-profile-front/commit/fd514aaa820d010251ee994ee5936ebe384286ed))
+
 ## [0.2.2](https://github.com/gastong256/mono256_my-profile-front/compare/v0.2.1...v0.2.2) (2026-03-14)
 
 ### Bug Fixes

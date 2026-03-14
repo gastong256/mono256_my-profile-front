@@ -38,14 +38,18 @@ function readRequiredPublicEnv(
 }
 
 export const env = {
-  siteUrl: readRequiredPublicEnv(
-    ["NEXT_PUBLIC_SITE_URL"],
-    "http://localhost:3000",
-    "site URL"
-  ),
-  apiBaseUrl: readRequiredPublicEnv(
-    ["NEXT_PUBLIC_API_BASE_URL", "NEXT_PUBLIC_API_URL"],
-    "http://localhost:4000",
-    "API base URL"
-  ),
+  get siteUrl() {
+    return readRequiredPublicEnv(
+      ["NEXT_PUBLIC_SITE_URL"],
+      "http://localhost:3000",
+      "site URL"
+    );
+  },
+  get apiBaseUrl() {
+    return readRequiredPublicEnv(
+      ["NEXT_PUBLIC_API_BASE_URL", "NEXT_PUBLIC_API_URL"],
+      "http://localhost:4000",
+      "API base URL"
+    );
+  },
 };

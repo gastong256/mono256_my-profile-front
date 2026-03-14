@@ -1,3 +1,9 @@
+## [0.2.2](https://github.com/gastong256/mono256_my-profile-front/compare/v0.2.1...v0.2.2) (2026-03-14)
+
+### Bug Fixes
+
+- lazily resolve public env vars to avoid unrelated route failures ([0f36c91](https://github.com/gastong256/mono256_my-profile-front/commit/0f36c913a79877ee3e0612fdb484df80a9da145a))
+
 ## [0.2.1](https://github.com/gastong256/mono256_my-profile-front/compare/v0.2.0...v0.2.1) (2026-03-14)
 
 ### Bug Fixes

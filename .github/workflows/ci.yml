@@ -8,6 +8,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      NEXT_PUBLIC_SITE_URL: https://gastong256.dev
+      NEXT_PUBLIC_API_BASE_URL: https://core--my-profile-api--mt8jltlx5b87.code.run
 
     steps:
       - name: Checkout

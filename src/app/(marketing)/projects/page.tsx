@@ -5,8 +5,9 @@ import { createPageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Projects",
-  description: "Selected projects focused on backend engineering, architecture, and product-minded delivery.",
-  path: "/projects"
+  description:
+    "Selected projects focused on backend engineering, architecture, and product-minded delivery.",
+  path: "/projects",
 });
 
 export default function ProjectsRoutePage() {

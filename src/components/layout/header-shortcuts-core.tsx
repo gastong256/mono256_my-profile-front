@@ -3,7 +3,7 @@ import {
   BuildShortcutIcon,
   ContactShortcutIcon,
   ProfileShortcutIcon,
-  ProjectsShortcutIcon
+  ProjectsShortcutIcon,
 } from "@/components/shared/icons/shortcut-icons";
 
 export type HeaderView = "about" | "projects" | "contact" | "build";
@@ -18,7 +18,7 @@ export const shortcuts: ShortcutItem[] = [
   { view: "about", label: "Profile.md", href: "/about" },
   { view: "projects", label: "Projects/", href: "/projects" },
   { view: "contact", label: "Contact.form", href: "/contact" },
-  { view: "build", label: "BuildYours.exe", href: "/product" }
+  { view: "build", label: "BuildYours.exe", href: "/product" },
 ];
 
 export function getActiveView(pathname: string): HeaderView | null {
@@ -34,7 +34,11 @@ export function getActiveView(pathname: string): HeaderView | null {
     return "contact";
   }
 
-  if (pathname.startsWith("/create") || pathname.startsWith("/product") || pathname.startsWith("/result/")) {
+  if (
+    pathname.startsWith("/create") ||
+    pathname.startsWith("/product") ||
+    pathname.startsWith("/result/")
+  ) {
     return "build";
   }
 
@@ -44,7 +48,7 @@ export function getActiveView(pathname: string): HeaderView | null {
 export function ShortcutIcon({
   view,
   active,
-  compact = false
+  compact = false,
 }: {
   view: HeaderView;
   active: boolean;
@@ -61,7 +65,16 @@ export function ShortcutIcon({
   }
 
   if (view === "contact") {
-    return <ContactShortcutIcon className={cn(iconClass, compact ? "h-[17px] w-[17px]" : "h-[21px] w-[21px] sm:h-6 sm:w-6 md:h-[26px] md:w-[26px]")} />;
+    return (
+      <ContactShortcutIcon
+        className={cn(
+          iconClass,
+          compact
+            ? "h-[17px] w-[17px]"
+            : "h-[21px] w-[21px] sm:h-6 sm:w-6 md:h-[26px] md:w-[26px]"
+        )}
+      />
+    );
   }
 
   if (view === "build") {

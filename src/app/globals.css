@@ -17,8 +17,16 @@
   body {
     position: relative;
     background-image:
-      radial-gradient(circle at 50% 12%, rgba(173, 209, 255, 0.08), transparent 24%),
-      radial-gradient(circle at 52% 64%, rgba(68, 148, 255, 0.11), transparent 31%),
+      radial-gradient(
+        circle at 50% 12%,
+        rgba(173, 209, 255, 0.08),
+        transparent 24%
+      ),
+      radial-gradient(
+        circle at 52% 64%,
+        rgba(68, 148, 255, 0.11),
+        transparent 31%
+      ),
       linear-gradient(180deg, #0b1424 0%, #070d18 100%);
     background-size: auto, auto, auto;
     background-attachment: fixed;
@@ -40,14 +48,32 @@
 
   body::before {
     background:
-      linear-gradient(135deg, transparent 0 8%, rgba(255, 255, 255, 0.018) 8.2% 8.45%, transparent 8.7% 100%),
-      linear-gradient(315deg, transparent 0 11%, rgba(74, 146, 255, 0.14) 11.15% 11.35%, transparent 11.55% 100%),
-      linear-gradient(225deg, transparent 0 87%, rgba(255, 255, 255, 0.018) 87.15% 87.35%, transparent 87.55% 100%);
+      linear-gradient(
+        135deg,
+        transparent 0 8%,
+        rgba(255, 255, 255, 0.018) 8.2% 8.45%,
+        transparent 8.7% 100%
+      ),
+      linear-gradient(
+        315deg,
+        transparent 0 11%,
+        rgba(74, 146, 255, 0.14) 11.15% 11.35%,
+        transparent 11.55% 100%
+      ),
+      linear-gradient(
+        225deg,
+        transparent 0 87%,
+        rgba(255, 255, 255, 0.018) 87.15% 87.35%,
+        transparent 87.55% 100%
+      );
     opacity: 0.42;
   }
 
   body::after {
-    background-image: radial-gradient(rgba(255, 255, 255, 0.045) 0.6px, transparent 0.6px);
+    background-image: radial-gradient(
+      rgba(255, 255, 255, 0.045) 0.6px,
+      transparent 0.6px
+    );
     background-size: 3px 3px;
     opacity: 0.16;
     mix-blend-mode: screen;

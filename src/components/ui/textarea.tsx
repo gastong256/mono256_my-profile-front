@@ -1,9 +1,15 @@
 import type { TextareaHTMLAttributes } from "react";
 
-import { focusVisibleRingClass, interactiveFieldClass } from "@/components/ui/foundation";
+import {
+  focusVisibleRingClass,
+  interactiveFieldClass,
+} from "@/components/ui/foundation";
 import { cn } from "@/lib/utils/cn";
 
-export function Textarea({ className, ...props }: TextareaHTMLAttributes<HTMLTextAreaElement>) {
+export function Textarea({
+  className,
+  ...props
+}: TextareaHTMLAttributes<HTMLTextAreaElement>) {
   return (
     <textarea
       className={cn(

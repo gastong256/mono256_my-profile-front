@@ -15,25 +15,25 @@ export const defaultMetadata: Metadata = {
   metadataBase,
   title: {
     default: siteContent.title,
-    template: `%s | ${siteContent.name}`
+    template: `%s | ${siteContent.name}`,
   },
   description: siteContent.description,
   alternates: {
-    canonical: "/"
+    canonical: "/",
   },
   openGraph: {
     title: siteContent.title,
     description: siteContent.description,
     url: baseUrl,
     siteName: siteContent.name,
-    type: "website"
-  }
+    type: "website",
+  },
 };
 
 export function createPageMetadata({
   title,
   description,
-  path = "/"
+  path = "/",
 }: CreatePageMetadataInput): Metadata {
   const url = new URL(path, baseUrl).toString();
 
@@ -41,14 +41,14 @@ export function createPageMetadata({
     title,
     description,
     alternates: {
-      canonical: path
+      canonical: path,
     },
     openGraph: {
       title,
       description,
       url,
       siteName: siteContent.name,
-      type: "website"
-    }
+      type: "website",
+    },
   };
 }

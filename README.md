@@ -166,6 +166,7 @@ Application runs at:
 ### Quality Checks
 
 ```bash
+pnpm format:check
 pnpm lint
 pnpm typecheck
 pnpm build
@@ -178,7 +179,7 @@ This repository uses local Git hooks through `husky`:
 - `pre-commit`: runs `lint-staged` on staged files
 - `commit-msg`: validates commit messages with `commitlint`
 
-Formatting is enforced on the files you stage for commit, which keeps the local workflow strict without forcing a full-repository formatting migration all at once.
+Formatting is enforced on staged files during local commits and checked across the full repository in CI.
 
 Expected commit message style follows Conventional Commits, for example:
 

@@ -22,14 +22,14 @@ export function generateMetadata({ params }: ProjectRoutePageProps): Metadata {
     return createPageMetadata({
       title: "Projects",
       description: "Project directory and engineering work overview.",
-      path: "/projects"
+      path: "/projects",
     });
   }
 
   return createPageMetadata({
     title: `${project.name} | Projects`,
     description: project.summary,
-    path: `/projects/${project.slug}`
+    path: `/projects/${project.slug}`,
   });
 }
 

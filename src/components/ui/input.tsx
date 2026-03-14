@@ -1,9 +1,15 @@
 import type { InputHTMLAttributes } from "react";
 
-import { focusVisibleRingClass, interactiveFieldClass } from "@/components/ui/foundation";
+import {
+  focusVisibleRingClass,
+  interactiveFieldClass,
+} from "@/components/ui/foundation";
 import { cn } from "@/lib/utils/cn";
 
-export function Input({ className, ...props }: InputHTMLAttributes<HTMLInputElement>) {
+export function Input({
+  className,
+  ...props
+}: InputHTMLAttributes<HTMLInputElement>) {
   return (
     <input
       className={cn(

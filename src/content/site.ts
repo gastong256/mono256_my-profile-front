@@ -1,6 +1,10 @@
 import type { SiteContent } from "@/types/content";
 
-export const siteContent: SiteContent & { domain: string; github: string; linkedin: string } = {
+export const siteContent: SiteContent & {
+  domain: string;
+  github: string;
+  linkedin: string;
+} = {
   name: "Gaston Gonzalez",
   title: "Gaston Gonzalez | Software Engineer",
   description:
@@ -15,12 +19,15 @@ export const siteContent: SiteContent & { domain: string; github: string; linked
     { label: "About", href: "/about" },
     { label: "Projects", href: "/projects" },
     { label: "Product", href: "/product" },
-    { label: "Contact", href: "/contact" }
+    { label: "Contact", href: "/contact" },
   ],
   social: [
     { label: "GitHub", href: "https://github.com/gastong256" },
-    { label: "LinkedIn", href: "https://www.linkedin.com/in/gastongonzalez256/" }
-  ]
+    {
+      label: "LinkedIn",
+      href: "https://www.linkedin.com/in/gastongonzalez256/",
+    },
+  ],
 };
 
 export const siteConfig = siteContent;

@@ -7,7 +7,7 @@ import type { ProjectItem } from "@/types/content";
 import { FolderIcon, TechIcon } from "@/components/shared/icons/project-icons";
 import {
   windowBodyResetClass,
-  windowScrollContainerClass
+  windowScrollContainerClass,
 } from "@/components/shared/window/foundation";
 import { WindowPageShell } from "@/components/shared/window/window-page-shell";
 import { Badge } from "@/components/ui/badge";
@@ -20,13 +20,19 @@ type ProjectStatusTone = NonNullable<ProjectItem["status"]>["tone"];
 
 export function ProjectsPage({ selectedSlug }: ProjectsPageProps) {
   const selectedProject = selectedSlug
-    ? projectsContent.find((project) => project.slug === selectedSlug) ?? null
+    ? (projectsContent.find((project) => project.slug === selectedSlug) ?? null)
     : null;
 
-  const featuredCount = projectsContent.filter((project) => project.featured).length;
-  const techTagsCount = new Set(projectsContent.flatMap((project) => project.tech)).size;
+  const featuredCount = projectsContent.filter(
+    (project) => project.featured
+  ).length;
+  const techTagsCount = new Set(
+    projectsContent.flatMap((project) => project.tech)
+  ).size;
 
-  const overviewPath = selectedProject ? `~/Projects/${selectedProject.slug}/` : "~/Projects/";
+  const overviewPath = selectedProject
+    ? `~/Projects/${selectedProject.slug}/`
+    : "~/Projects/";
 
   return (
     <WindowPageShell
@@ -39,15 +45,19 @@ export function ProjectsPage({ selectedSlug }: ProjectsPageProps) {
         items: selectedProject
           ? [
               "Review the selected project overview and technical highlights.",
-              "Open repository or demo links in external tabs."
+              "Open repository or demo links in external tabs.",
             ]
           : [
               "Open a project folder to view its overview.",
-              "Browse all available projects as a directory."
-            ]
+              "Browse all available projects as a directory.",
+            ],
       }}
     >
-      {selectedProject ? <ProjectOverview project={selectedProject} /> : <ProjectsDirectory />}
+      {selectedProject ? (
+        <ProjectOverview project={selectedProject} />
+      ) : (
+        <ProjectsDirectory />
+      )}
 
       <div className="border-t border-border/70 bg-background/25 px-4 py-2 md:px-6 lg:px-5 lg:py-1.5">
         <p className="font-mono text-[11px] text-foreground/70 md:whitespace-nowrap md:text-xs">
@@ -62,7 +72,9 @@ export function ProjectsPage({ selectedSlug }: ProjectsPageProps) {
 
 function ProjectsDirectory() {
   return (
-    <section className={`min-h-0 flex-1 p-4 md:p-6 lg:p-4 ${windowScrollContainerClass}`}>
+    <section
+      className={`min-h-0 flex-1 p-4 md:p-6 lg:p-4 ${windowScrollContainerClass}`}
+    >
       <div className="mb-4 flex items-center gap-2 font-mono text-[11px] text-foreground/65 md:text-xs lg:mb-3">
         <span className="text-foreground/75">~/Projects</span>
       </div>
@@ -77,7 +89,9 @@ function ProjectsDirectory() {
             <div className="flex items-center justify-between gap-3">
               <div className="flex min-w-0 items-center gap-2">
                 <FolderIcon className="text-foreground/75 group-hover:text-foreground" />
-                <p className="truncate text-sm font-semibold text-foreground">{project.name}/</p>
+                <p className="truncate text-sm font-semibold text-foreground">
+                  {project.name}/
+                </p>
               </div>
               {project.status ? (
                 <Badge className={statusBadgeClass(project.status.tone)}>
@@ -88,7 +102,9 @@ function ProjectsDirectory() {
               ) : null}
             </div>
 
-            <p className="mt-3 flex-1 break-words text-sm text-foreground/75 lg:mt-2.5 lg:text-[13px]">{project.summary}</p>
+            <p className="mt-3 flex-1 break-words text-sm text-foreground/75 lg:mt-2.5 lg:text-[13px]">
+              {project.summary}
+            </p>
             <div className="mt-4 flex items-center justify-between gap-3 lg:mt-3">
               <p className="inline-flex items-center gap-1 font-mono text-[11px] text-brand">
                 <span aria-hidden>›</span>
@@ -120,7 +136,10 @@ function ProjectOverview({ project }: { project: ProjectItem }) {
     <section className="flex min-h-0 flex-1 flex-col p-4 md:p-6 lg:p-4">
       <div className={`min-h-0 flex-1 ${windowScrollContainerClass}`}>
         <div className="flex min-w-0 flex-wrap items-center gap-2 font-mono text-[11px] text-foreground/65 md:text-xs">
-          <Link href="/projects" className="text-foreground/75 hover:text-foreground">
+          <Link
+            href="/projects"
+            className="text-foreground/75 hover:text-foreground"
+          >
             ~/Projects
           </Link>
           <span>/</span>
@@ -130,22 +149,32 @@ function ProjectOverview({ project }: { project: ProjectItem }) {
         <div className="px-2 md:px-4 lg:px-5">
           <div className="mt-4 flex min-w-0 items-center gap-2 lg:mt-3">
             <FolderIcon className="text-foreground/80" />
-            <h2 className="break-words text-xl font-semibold text-foreground md:text-2xl">{detailTitle}</h2>
+            <h2 className="break-words text-xl font-semibold text-foreground md:text-2xl">
+              {detailTitle}
+            </h2>
           </div>
 
           <div className="mt-3 space-y-2.5 lg:mt-2.5">
             {overviewParagraphs.map((paragraph) => (
-              <p key={paragraph} className="text-justify break-words text-sm text-foreground/80 md:text-base lg:text-[15px]">
+              <p
+                key={paragraph}
+                className="text-justify break-words text-sm text-foreground/80 md:text-base lg:text-[15px]"
+              >
                 {paragraph}
               </p>
             ))}
           </div>
 
           <div className="mt-6 lg:mt-4">
-            <p className="font-mono text-[11px] uppercase tracking-wide text-foreground/60 md:text-xs">Highlights</p>
+            <p className="font-mono text-[11px] uppercase tracking-wide text-foreground/60 md:text-xs">
+              Highlights
+            </p>
             <ul className="mt-3 space-y-2 lg:mt-2.5 lg:space-y-1.5">
               {project.highlights.map((highlight) => (
-                <li key={highlight} className="break-words text-sm text-foreground/80 md:text-[15px]">
+                <li
+                  key={highlight}
+                  className="break-words text-sm text-foreground/80 md:text-[15px]"
+                >
                   <span className="mr-2 text-brand">•</span>
                   {highlight}
                 </li>
@@ -155,15 +184,24 @@ function ProjectOverview({ project }: { project: ProjectItem }) {
 
           {project.stackGroups?.length ? (
             <div className="mt-6 space-y-3 lg:mt-4">
-              <p className="font-mono text-[11px] uppercase tracking-wide text-foreground/60 md:text-xs">Stack</p>
+              <p className="font-mono text-[11px] uppercase tracking-wide text-foreground/60 md:text-xs">
+                Stack
+              </p>
               {project.stackGroups.map((group) => (
-                <div key={`${project.slug}-${group.label}`} className="flex flex-wrap items-start gap-2">
+                <div
+                  key={`${project.slug}-${group.label}`}
+                  className="flex flex-wrap items-start gap-2"
+                >
                   {showStackGroupLabel ? (
-                    <p className="min-w-20 pt-0.5 text-xs font-semibold uppercase tracking-wide text-foreground/70">{group.label}</p>
+                    <p className="min-w-20 pt-0.5 text-xs font-semibold uppercase tracking-wide text-foreground/70">
+                      {group.label}
+                    </p>
                   ) : null}
                   <div className="flex flex-wrap gap-2">
                     {group.items.map((item) => (
-                      <Badge key={`${project.slug}-${group.label}-${item}`}>{item}</Badge>
+                      <Badge key={`${project.slug}-${group.label}-${item}`}>
+                        {item}
+                      </Badge>
                     ))}
                   </div>
                 </div>
@@ -247,7 +285,7 @@ function buildProjectActions(project: ProjectItem): ProjectAction[] {
     actions.push({
       label: "Live Demo",
       href: project.demoUrl,
-      kind: "demo"
+      kind: "demo",
     });
   }
 
@@ -255,7 +293,7 @@ function buildProjectActions(project: ProjectItem): ProjectAction[] {
     actions.push({
       label: "Backend",
       href: project.repositories.backend,
-      kind: "backend"
+      kind: "backend",
     });
   }
 
@@ -263,15 +301,19 @@ function buildProjectActions(project: ProjectItem): ProjectAction[] {
     actions.push({
       label: "Frontend",
       href: project.repositories.frontend,
-      kind: "frontend"
+      kind: "frontend",
     });
   }
 
-  if (!project.repositories?.backend && !project.repositories?.frontend && project.repositoryUrl) {
+  if (
+    !project.repositories?.backend &&
+    !project.repositories?.frontend &&
+    project.repositoryUrl
+  ) {
     actions.push({
       label: "Repository",
       href: project.repositoryUrl,
-      kind: "repository"
+      kind: "repository",
     });
   }
 
@@ -279,13 +321,23 @@ function buildProjectActions(project: ProjectItem): ProjectAction[] {
 
   return actions.map((action, index) => ({
     ...action,
-    variant: action.kind === "demo" || (!hasDemo && index === 0) ? "primary" : "secondary"
+    variant:
+      action.kind === "demo" || (!hasDemo && index === 0)
+        ? "primary"
+        : "secondary",
   }));
 }
 
 function LaunchIcon({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="1.9" aria-hidden>
+    <svg
+      viewBox="0 0 24 24"
+      className={className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.9"
+      aria-hidden
+    >
       <path d="M14 4h6v6" />
       <path d="M10 14 20 4" />
       <path d="M20 13v5a2 2 0 0 1-2 2h-12a2 2 0 0 1-2-2v-12a2 2 0 0 1 2-2h5" />
@@ -295,7 +347,14 @@ function LaunchIcon({ className }: { className?: string }) {
 
 function BackIcon({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="1.9" aria-hidden>
+    <svg
+      viewBox="0 0 24 24"
+      className={className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.9"
+      aria-hidden
+    >
       <path d="M15 6 9 12l6 6" />
     </svg>
   );

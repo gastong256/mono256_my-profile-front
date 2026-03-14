@@ -23,7 +23,9 @@ export function SiteHeader() {
                 <span className="block truncate font-sans text-[12px] font-semibold tracking-[0.01em] text-foreground transition-colors group-hover:text-foreground/95 md:inline md:text-[13px]">
                   Gastón Germán Gonzalez
                 </span>
-                <span className="mx-1.5 hidden text-foreground/35 md:inline">|</span>
+                <span className="mx-1.5 hidden text-foreground/35 md:inline">
+                  |
+                </span>
                 <span className="mt-0.5 block font-mono text-[10px] tracking-[0.06em] text-brand/90 transition-colors group-hover:text-brand md:mt-0 md:inline md:text-[11px]">
                   {profileContent.role}
                 </span>

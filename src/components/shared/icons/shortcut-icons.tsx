@@ -6,7 +6,14 @@ type ShortcutIconProps = {
 
 export function ProfileShortcutIcon({ className }: ShortcutIconProps) {
   return (
-    <svg viewBox="0 0 24 24" className={cn(className)} fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden>
+    <svg
+      viewBox="0 0 24 24"
+      className={cn(className)}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.7"
+      aria-hidden
+    >
       <path d="M7 4.5h8l4 4v11a1 1 0 0 1-1 1H7a2 2 0 0 1-2-2v-12a2 2 0 0 1 2-2Z" />
       <path d="M15 4.5v4h4" />
       <path d="M8.5 12h7" />
@@ -17,7 +24,14 @@ export function ProfileShortcutIcon({ className }: ShortcutIconProps) {
 
 export function ProjectsShortcutIcon({ className }: ShortcutIconProps) {
   return (
-    <svg viewBox="0 0 24 24" className={cn(className)} fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden>
+    <svg
+      viewBox="0 0 24 24"
+      className={cn(className)}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.7"
+      aria-hidden
+    >
       <path d="M3.5 7.5h6l1.7-2h9.3a1 1 0 0 1 1 1v10.5a1.5 1.5 0 0 1-1.5 1.5H5a1.5 1.5 0 0 1-1.5-1.5V7.5Z" />
       <path d="M3.5 9.5h18" />
     </svg>
@@ -26,7 +40,12 @@ export function ProjectsShortcutIcon({ className }: ShortcutIconProps) {
 
 export function ContactShortcutIcon({ className }: ShortcutIconProps) {
   return (
-    <svg viewBox="0 0 24 24" className={cn(className)} fill="currentColor" aria-hidden>
+    <svg
+      viewBox="0 0 24 24"
+      className={cn(className)}
+      fill="currentColor"
+      aria-hidden
+    >
       <path d="M4,24v-5H0V0h23v19h-9.3L4,24z M2,17h4v3.7l7.3-3.7H21V2H2V17z" />
       <rect x="5" y="8" width="3" height="3" />
       <rect x="10" y="8" width="3" height="3" />
@@ -47,4 +66,3 @@ export function BuildShortcutIcon({ className }: ShortcutIconProps) {
     </svg>
   );
 }
-

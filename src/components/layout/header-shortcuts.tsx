@@ -6,7 +6,11 @@ import { usePathname } from "next/navigation";
 import { navItemActiveClass, navItemClass } from "@/components/ui/foundation";
 import { cn } from "@/lib/utils/cn";
 
-import { getActiveView, shortcuts, ShortcutIcon } from "./header-shortcuts-core";
+import {
+  getActiveView,
+  shortcuts,
+  ShortcutIcon,
+} from "./header-shortcuts-core";
 
 export function HeaderShortcuts() {
   const pathname = usePathname();
@@ -26,7 +30,10 @@ export function HeaderShortcuts() {
               )}
             >
               <span className="grid h-10 w-10 place-items-center transition-transform duration-150 group-hover:-translate-y-0.5 md:h-11 md:w-11">
-                <ShortcutIcon view={shortcut.view} active={activeView === shortcut.view} />
+                <ShortcutIcon
+                  view={shortcut.view}
+                  active={activeView === shortcut.view}
+                />
               </span>
               <span
                 className={cn(

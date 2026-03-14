@@ -5,5 +5,11 @@ type ExternalLinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
 };
 
 export function ExternalLink({ target, rel, ...props }: ExternalLinkProps) {
-  return <a target={target ?? "_blank"} rel={rel ?? "noopener noreferrer"} {...props} />;
+  return (
+    <a
+      target={target ?? "_blank"}
+      rel={rel ?? "noopener noreferrer"}
+      {...props}
+    />
+  );
 }

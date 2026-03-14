@@ -6,7 +6,7 @@ export const projectsContent: ProjectItem[] = [
     name: "FastAPI Production Template",
     status: {
       label: "Production-ready",
-      tone: "production"
+      tone: "production",
     },
     summary:
       "Production-grade FastAPI template built as a golden path for backend services, including authentication scaffolding, PostgreSQL persistence, structured logging, rate limiting, and observability.",
@@ -19,7 +19,7 @@ export const projectsContent: ProjectItem[] = [
       "Structured logging with request and tenant context propagation.",
       "Built-in rate limiting and security middleware.",
       "Observability with Prometheus metrics and optional OpenTelemetry.",
-      "Designed as a reusable production template for backend APIs."
+      "Designed as a reusable production template for backend APIs.",
     ],
     stackGroups: [
       {
@@ -38,23 +38,23 @@ export const projectsContent: ProjectItem[] = [
           "Pytest",
           "Pyright",
           "Ruff",
-          "GitHub Actions"
-        ]
-      }
+          "GitHub Actions",
+        ],
+      },
     ],
     lastUpdated: "Mar 2026",
     tech: ["FastAPI", "PostgreSQL", "Docker", "OpenTelemetry"],
     repositories: {
-      backend: "https://github.com/gastong256/fastapi-base-template"
+      backend: "https://github.com/gastong256/fastapi-base-template",
     },
-    featured: true
+    featured: true,
   },
   {
     slug: "accounting-system-asienta",
     name: "ASIENTA — SIC",
     status: {
       label: "Featured",
-      tone: "featured"
+      tone: "featured",
     },
     detailTitle: "ASIENTA — Accounting Information System",
     summary:
@@ -65,26 +65,44 @@ export const projectsContent: ProjectItem[] = [
       "Real double-entry accounting enforced by django-hordak — debit/credit balance validated before every journal entry is persisted.",
       "Role-based access control (student / teacher / admin) with company ownership and course enrollment scoping.",
       "Fully functional frontend demo deployed on Vercel — runs against MSW mocks with no backend required.",
-      "Production-ready backend: structured logs, health checks, OpenTelemetry, automated releases via semantic-release."
+      "Production-ready backend: structured logs, health checks, OpenTelemetry, automated releases via semantic-release.",
     ],
     stackGroups: [
       {
         label: "Backend",
-        items: ["Django", "DRF", "PostgreSQL", "django-hordak", "JWT", "Docker", "Pytest"]
+        items: [
+          "Django",
+          "DRF",
+          "PostgreSQL",
+          "django-hordak",
+          "JWT",
+          "Docker",
+          "Pytest",
+        ],
       },
       {
         label: "Frontend",
-        items: ["React 19", "TypeScript", "Vite", "Tailwind CSS", "Zustand", "TanStack Query", "Zod", "MSW", "Playwright"]
-      }
+        items: [
+          "React 19",
+          "TypeScript",
+          "Vite",
+          "Tailwind CSS",
+          "Zustand",
+          "TanStack Query",
+          "Zod",
+          "MSW",
+          "Playwright",
+        ],
+      },
     ],
     lastUpdated: "Mar 2026",
     tech: ["Django", "PostgreSQL", "React", "TypeScript"],
     repositories: {
       backend: "https://github.com/gastong256/mono256_sic-core",
-      frontend: "https://github.com/gastong256/mono256_sic_web"
+      frontend: "https://github.com/gastong256/mono256_sic_web",
     },
     demoUrl: "https://mono256-sic-web.vercel.app/",
-    featured: true
+    featured: true,
   },
   {
     slug: "my-profile-generator",
@@ -98,14 +116,14 @@ export const projectsContent: ProjectItem[] = [
     highlights: [
       "Product direction focused on fast setup, clean defaults, and minimal configuration.",
       "Architecture designed to evolve from a single site into a reusable generation platform.",
-      "Current phase focused on implementing the core onboarding flow and platform integrations."
+      "Current phase focused on implementing the core onboarding flow and platform integrations.",
     ],
 
     lastUpdated: "Mar 2026",
     tech: ["Next.js", "Fastify", "BullMQ", "PostgreSQL", "Redis"],
     repositories: {
-      frontend: "https://github.com/gastong256/mono256_my-profile-front"
+      frontend: "https://github.com/gastong256/mono256_my-profile-front",
     },
-    featured: true
-  }
+    featured: true,
+  },
 ];

@@ -1,7 +1,12 @@
 import type { ReactNode } from "react";
 
 import { PageContainer } from "@/components/layout/page-container";
-import { WindowFrame, type WindowFrameHelp, type WindowFrameSize, type WindowFrameStatus } from "@/components/shared/window/window-frame";
+import {
+  WindowFrame,
+  type WindowFrameHelp,
+  type WindowFrameSize,
+  type WindowFrameStatus,
+} from "@/components/shared/window/window-frame";
 import { cn } from "@/lib/utils/cn";
 
 type WindowPageShellProps = {
@@ -27,10 +32,15 @@ export function WindowPageShell({
   containerClassName,
   windowClassName,
   windowBodyClassName,
-  size = "fixed"
+  size = "fixed",
 }: WindowPageShellProps) {
   return (
-    <PageContainer className={cn("flex min-h-0 flex-col py-1 md:h-full md:py-2", containerClassName)}>
+    <PageContainer
+      className={cn(
+        "flex min-h-0 flex-col py-1 md:h-full md:py-2",
+        containerClassName
+      )}
+    >
       <WindowFrame
         title={title}
         subtitle={subtitle}

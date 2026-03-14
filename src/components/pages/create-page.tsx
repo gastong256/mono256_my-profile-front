@@ -7,28 +7,33 @@ import { useRouter } from "next/navigation";
 import { productContent } from "@/content/product";
 import {
   windowFillColumnClass,
-  windowNoScrollContainerClass
+  windowNoScrollContainerClass,
 } from "@/components/shared/window/foundation";
 import { WindowPageShell } from "@/components/shared/window/window-page-shell";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { statusPillBaseClassName, statusPillClassName } from "@/components/ui/status-pill";
+import {
+  statusPillBaseClassName,
+  statusPillClassName,
+} from "@/components/ui/status-pill";
 
 const templateOptions = [
   {
     id: "minimal-shell",
     name: "Minimal Shell",
-    description: "Clean terminal-forward layout with restrained accents."
+    description: "Clean terminal-forward layout with restrained accents.",
   },
   {
     id: "docs-style",
     name: "Docs Style",
-    description: "Documentation-style developer site focused on clarity, structured sections, and easy navigation."
+    description:
+      "Documentation-style developer site focused on clarity, structured sections, and easy navigation.",
   },
   {
     id: "cards",
     name: "Cards",
-    description: "Card-based developer site layout optimized for quickly exploring projects."
-  }
+    description:
+      "Card-based developer site layout optimized for quickly exploring projects.",
+  },
 ] as const;
 
 export function CreatePageContent() {
@@ -37,8 +42,10 @@ export function CreatePageContent() {
   const [vercelConnected, setVercelConnected] = useState(false);
   const [selectedTemplate, setSelectedTemplate] = useState<string | null>(null);
 
-  const canInstall = githubConnected && vercelConnected && Boolean(selectedTemplate);
-  const activeTemplate = templateOptions.find((option) => option.id === selectedTemplate) ?? null;
+  const canInstall =
+    githubConnected && vercelConnected && Boolean(selectedTemplate);
+  const activeTemplate =
+    templateOptions.find((option) => option.id === selectedTemplate) ?? null;
 
   return (
     <WindowPageShell
@@ -51,18 +58,22 @@ export function CreatePageContent() {
         path: "~/BuildYours.exe/install",
         items: [
           "Preview the GitHub and Vercel connection flow, then choose a template.",
-          "Run the preview installation to continue into the summary view."
+          "Run the preview installation to continue into the summary view.",
         ],
         cta: {
           label: "Back To Overview",
-          href: "/product"
-        }
+          href: "/product",
+        },
       }}
     >
       <div className={windowNoScrollContainerClass}>
         <div className={windowFillColumnClass}>
-          <p className="font-mono text-[11px] uppercase tracking-wide text-foreground/60">Step 2 of 2 · Connections</p>
-          <h1 className="mt-1.5 text-xl font-semibold tracking-tight md:text-2xl">{productContent.installTitle}</h1>
+          <p className="font-mono text-[11px] uppercase tracking-wide text-foreground/60">
+            Step 2 of 2 · Connections
+          </p>
+          <h1 className="mt-1.5 text-xl font-semibold tracking-tight md:text-2xl">
+            {productContent.installTitle}
+          </h1>
 
           <div className="mt-3 grid min-h-0 flex-1 gap-2.5 lg:mt-2.5 lg:gap-2 lg:grid-cols-[360px_minmax(0,1fr)]">
             <div className="space-y-2.5 lg:space-y-2">
@@ -87,15 +98,26 @@ export function CreatePageContent() {
 
             <PreviewPanel
               templateName={activeTemplate?.name ?? "No template selected"}
-              templateDescription={activeTemplate?.description ?? "Select one template to continue installation."}
+              templateDescription={
+                activeTemplate?.description ??
+                "Select one template to continue installation."
+              }
             />
           </div>
 
           <div className="mt-3 flex flex-wrap items-center justify-between gap-3 border-t border-border/70 pt-3 lg:mt-2.5 lg:pt-2.5">
-            <Link href="/product" className={buttonVariants({ variant: "secondary", size: "md" })}>
+            <Link
+              href="/product"
+              className={buttonVariants({ variant: "secondary", size: "md" })}
+            >
               Back
             </Link>
-            <Button type="button" disabled={!canInstall} onClick={() => router.push("/result/installation-summary")} className="min-w-36">
+            <Button
+              type="button"
+              disabled={!canInstall}
+              onClick={() => router.push("/result/installation-summary")}
+              className="min-w-36"
+            >
               Run preview
             </Button>
           </div>
@@ -109,7 +131,7 @@ function ProviderCard({
   name,
   description,
   connected,
-  onConnect
+  onConnect,
 }: {
   name: string;
   description: string;
@@ -135,7 +157,12 @@ function ProviderCard({
       </div>
 
       <div className="mt-2.5 lg:mt-2">
-        <Button type="button" variant={connected ? "secondary" : "primary"} size="sm" onClick={onConnect}>
+        <Button
+          type="button"
+          variant={connected ? "secondary" : "primary"}
+          size="sm"
+          onClick={onConnect}
+        >
           {connected ? `Disconnect ${name}` : `Connect ${name}`}
         </Button>
       </div>
@@ -146,7 +173,7 @@ function ProviderCard({
 function TemplateSelector({
   options,
   selectedTemplate,
-  onSelectTemplate
+  onSelectTemplate,
 }: {
   options: typeof templateOptions;
   selectedTemplate: string | null;
@@ -157,7 +184,9 @@ function TemplateSelector({
       <div className="flex items-start justify-between gap-3">
         <div>
           <p className="text-base font-semibold text-foreground">Template</p>
-          <p className="mt-0.5 text-xs text-foreground/75">Select one base style.</p>
+          <p className="mt-0.5 text-xs text-foreground/75">
+            Select one base style.
+          </p>
         </div>
         <span
           className={
@@ -190,18 +219,26 @@ function TemplateSelector({
 
 function PreviewPanel({
   templateName,
-  templateDescription
+  templateDescription,
 }: {
   templateName: string;
   templateDescription: string;
 }) {
   return (
     <aside className="rounded-lg border border-border/80 bg-surface/80 p-3 lg:p-3">
-      <p className="font-mono text-[11px] uppercase tracking-wide text-foreground/60">Preview</p>
+      <p className="font-mono text-[11px] uppercase tracking-wide text-foreground/60">
+        Preview
+      </p>
       <div className="mt-2 rounded-md border border-border/70 bg-background/25 p-3 lg:p-2.5">
-        <p className="text-xs font-semibold uppercase tracking-wide text-brand">Selected template</p>
-        <p className="mt-1 text-sm font-semibold text-foreground">{templateName}</p>
-        <p className="mt-1 text-[11px] text-foreground/70">{templateDescription}</p>
+        <p className="text-xs font-semibold uppercase tracking-wide text-brand">
+          Selected template
+        </p>
+        <p className="mt-1 text-sm font-semibold text-foreground">
+          {templateName}
+        </p>
+        <p className="mt-1 text-[11px] text-foreground/70">
+          {templateDescription}
+        </p>
       </div>
 
       <div className="mt-2 rounded-md border border-border/70 bg-background/20 p-3 lg:p-2.5">

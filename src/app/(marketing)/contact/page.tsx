@@ -5,8 +5,9 @@ import { createPageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Contact",
-  description: "Contact Gaston Gonzalez for backend, architecture, and product engineering consulting.",
-  path: "/contact"
+  description:
+    "Contact Gaston Gonzalez for backend, architecture, and product engineering consulting.",
+  path: "/contact",
 });
 
 export default function ContactRoutePage() {

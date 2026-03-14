@@ -3,7 +3,7 @@ import Image from "next/image";
 import { profileContent } from "@/content/profile";
 import {
   windowBodyResetClass,
-  windowScrollContainerClass
+  windowScrollContainerClass,
 } from "@/components/shared/window/foundation";
 import { WindowPageShell } from "@/components/shared/window/window-page-shell";
 
@@ -31,7 +31,7 @@ export function AboutPage() {
     "## What I'm looking for",
     ...aboutDocument.principles,
     "",
-    "EOF"
+    "EOF",
   ];
 
   const wordCount = documentLines
@@ -53,16 +53,16 @@ export function AboutPage() {
         path: "~/Profile.md",
         items: [
           "Review profile summary and engineering highlights.",
-          "Understand core strengths and delivery style."
-        ]
+          "Understand core strengths and delivery style.",
+        ],
       }}
     >
       <div className="border-b border-border/70 bg-background/30 px-4 py-2 md:px-6">
         <div className="grid grid-cols-1 items-center gap-1 md:grid-cols-[1fr_auto_1fr] md:gap-4">
           <p className="whitespace-nowrap font-mono text-[11px] text-foreground/70 md:text-xs">
             {lineCount} lines · {wordCount} words
-            <span className="mx-2 text-foreground/40">•</span>
-            ~{readingTimeMinutes} min read
+            <span className="mx-2 text-foreground/40">•</span>~
+            {readingTimeMinutes} min read
           </p>
 
           <p className="hidden whitespace-nowrap text-center font-mono text-[11px] text-foreground/65 md:block md:text-xs">
@@ -75,10 +75,14 @@ export function AboutPage() {
         </div>
       </div>
 
-      <article className={`min-h-0 flex-1 p-4 md:p-6 ${windowScrollContainerClass}`}>
+      <article
+        className={`min-h-0 flex-1 p-4 md:p-6 ${windowScrollContainerClass}`}
+      >
         <div className="font-mono text-[13px] leading-6 text-[#A9B4C0] md:text-sm md:leading-7">
           <p className="font-sans text-[17px] font-bold leading-7 text-[#E6EDF3] md:text-[22px] md:leading-8">
-            <span className="mr-1 font-mono font-semibold text-[#88C0D0]">#</span>
+            <span className="mr-1 font-mono font-semibold text-[#88C0D0]">
+              #
+            </span>
             {aboutDocument.title}
           </p>
 
@@ -96,23 +100,37 @@ export function AboutPage() {
               />
             </div>
             <div>
-              <p className="font-medium text-[#E6EDF3]">{profileContent.fullName}</p>
-              <p className="mt-0.5 font-medium text-[#E6EDF3]">{aboutDocument.profileRole}</p>
-              <p className="mt-1 text-[#A9B4C0]">{profileContent.location.replace(" - ", " · ")}</p>
+              <p className="font-medium text-[#E6EDF3]">
+                {profileContent.fullName}
+              </p>
+              <p className="mt-0.5 font-medium text-[#E6EDF3]">
+                {aboutDocument.profileRole}
+              </p>
+              <p className="mt-1 text-[#A9B4C0]">
+                {profileContent.location.replace(" - ", " · ")}
+              </p>
             </div>
           </div>
 
           <p className="mt-5 font-semibold text-[#88C0D0]">## About</p>
-          <p className="mt-1.5 font-medium text-[#E6EDF3]">{aboutDocument.intro[0]}</p>
+          <p className="mt-1.5 font-medium text-[#E6EDF3]">
+            {aboutDocument.intro[0]}
+          </p>
           {aboutDocument.intro.slice(1).map((line) => (
             <p key={line} className="mt-2 leading-[1.65] text-[#A9B4C0]">
               {line}
             </p>
           ))}
 
-          <p className="mt-5 font-semibold text-[#88C0D0]">## {aboutDocument.experienceSnapshot.title}</p>
-          <p className="mt-3 font-medium text-[#E6EDF3]">{aboutDocument.experienceSnapshot.lead}</p>
-          <p className="mt-3 leading-[1.65] text-[#A9B4C0]">{aboutDocument.experienceSnapshot.detail}</p>
+          <p className="mt-5 font-semibold text-[#88C0D0]">
+            ## {aboutDocument.experienceSnapshot.title}
+          </p>
+          <p className="mt-3 font-medium text-[#E6EDF3]">
+            {aboutDocument.experienceSnapshot.lead}
+          </p>
+          <p className="mt-3 leading-[1.65] text-[#A9B4C0]">
+            {aboutDocument.experienceSnapshot.detail}
+          </p>
 
           <p className="mt-5 font-semibold text-[#88C0D0]">## How I work</p>
           {aboutDocument.focusAreas.map((area) => (
@@ -121,16 +139,24 @@ export function AboutPage() {
             </p>
           ))}
 
-          <p className="mt-5 font-semibold text-[#88C0D0]">## What I&apos;m looking for</p>
+          <p className="mt-5 font-semibold text-[#88C0D0]">
+            ## What I&apos;m looking for
+          </p>
           {aboutDocument.principles.map((principle) => (
-            <p key={principle} className="mt-1.5 font-medium leading-[1.6] text-[#E6EDF3]">
+            <p
+              key={principle}
+              className="mt-1.5 font-medium leading-[1.6] text-[#E6EDF3]"
+            >
               {principle}
             </p>
           ))}
 
           <p className="mt-5 text-[12px] font-semibold tracking-[0.04em] text-[#7D8896]">
             EOF
-            <span className="cursor-blink ml-2 inline-block h-4 w-[3px] rounded-sm bg-[#A9B4C0] align-middle" aria-hidden />
+            <span
+              className="cursor-blink ml-2 inline-block h-4 w-[3px] rounded-sm bg-[#A9B4C0] align-middle"
+              aria-hidden
+            />
           </p>
         </div>
       </article>

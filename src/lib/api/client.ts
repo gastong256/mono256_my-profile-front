@@ -1,4 +1,4 @@
-import { env } from "@/lib/env";
+import { getPublicApiBaseUrl } from "@/lib/env";
 import type { ApiClientOptions, ApiErrorCode, ApiMethod } from "@/types/api";
 
 export class ApiError extends Error {
@@ -142,7 +142,7 @@ export async function apiClient<TResponse = unknown, TBody = unknown>(
   const isGetMethod = method === "GET";
   const resolvedCache = resolveCachePolicy(method, cache);
 
-  const response = await fetch(`${env.apiBaseUrl}${resolvedPath}`, {
+  const response = await fetch(`${getPublicApiBaseUrl()}${resolvedPath}`, {
     method,
     headers: {
       ...(body ? { "Content-Type": "application/json" } : {}),

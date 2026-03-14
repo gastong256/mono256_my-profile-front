@@ -1,55 +1,38 @@
-type PublicEnvKey =
-  | "NEXT_PUBLIC_SITE_URL"
-  | "NEXT_PUBLIC_API_BASE_URL"
-  | "NEXT_PUBLIC_API_URL";
-
-function readEnv(keys: PublicEnvKey[], fallback: string): string {
-  for (const key of keys) {
-    const value = process.env[key];
-
-    if (value) {
-      return value;
-    }
-  }
-
-  return fallback;
-}
-
 function readRequiredPublicEnv(
-  keys: PublicEnvKey[],
+  value: string | undefined,
   fallback: string,
-  label: string
+  label: string,
+  key: string
 ): string {
-  const value = readEnv(keys, fallback);
+  const resolvedValue = value || fallback;
 
   if (
     process.env.NODE_ENV === "production" &&
-    value === fallback &&
+    resolvedValue === fallback &&
     fallback.startsWith("http://localhost")
   ) {
     throw new Error(
-      `Missing required public environment variable for ${label}. Set one of: ${keys.join(
-        ", "
-      )}.`
+      `Missing required public environment variable for ${label}. Set: ${key}.`
     );
   }
 
-  return value;
+  return resolvedValue;
 }
 
-export const env = {
-  get siteUrl() {
-    return readRequiredPublicEnv(
-      ["NEXT_PUBLIC_SITE_URL"],
-      "http://localhost:3000",
-      "site URL"
-    );
-  },
-  get apiBaseUrl() {
-    return readRequiredPublicEnv(
-      ["NEXT_PUBLIC_API_BASE_URL", "NEXT_PUBLIC_API_URL"],
-      "http://localhost:4000",
-      "API base URL"
-    );
-  },
-};
+export function getPublicSiteUrl() {
+  return readRequiredPublicEnv(
+    process.env.NEXT_PUBLIC_SITE_URL,
+    "http://localhost:3000",
+    "site URL",
+    "NEXT_PUBLIC_SITE_URL"
+  );
+}
+
+export function getPublicApiBaseUrl() {
+  return readRequiredPublicEnv(
+    process.env.NEXT_PUBLIC_API_BASE_URL,
+    "http://localhost:4000",
+    "API base URL",
+    "NEXT_PUBLIC_API_BASE_URL"
+  );
+}

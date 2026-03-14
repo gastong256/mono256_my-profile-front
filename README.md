@@ -206,8 +206,7 @@ Defined in `.env.example`:
 
 Notes:
 
-- `NEXT_PUBLIC_API_BASE_URL` is the preferred backend base URL variable for the current implementation.
-- `NEXT_PUBLIC_API_URL` is still accepted as a fallback for backward compatibility.
+- `NEXT_PUBLIC_API_BASE_URL` is the single supported backend base URL variable for the current implementation.
 - The frontend never hardcodes backend domains.
 
 These are used for metadata, sitemap/robots generation, and the typed API client.

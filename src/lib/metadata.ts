@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 
 import { siteContent } from "@/content/site";
+import { getPublicSiteUrl } from "@/lib/env";
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+const baseUrl = getPublicSiteUrl();
 const metadataBase = new URL(baseUrl);
 
 type CreatePageMetadataInput = {

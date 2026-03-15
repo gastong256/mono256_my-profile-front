@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 
 import { ExternalLink } from "@/components/shared/primitives/external-link";
 import { siteContent } from "@/content/site";
@@ -14,12 +14,16 @@ import {
   windowBodyResetClass,
   windowScrollContainerClass,
 } from "@/components/shared/window/foundation";
+import {
+  TurnstileWidget,
+  type TurnstileWidgetHandle,
+} from "@/components/shared/integrations/turnstile-widget";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { submitContactRequest } from "@/lib/api/contact";
 import { ApiError } from "@/lib/api/client";
-import { getOptionalContactCaptchaToken } from "@/lib/contact/captcha";
+import { getPublicTurnstileSiteKey, isTurnstileEnabled } from "@/lib/env";
 
 type ContactFormState = {
   name: string;
@@ -48,36 +52,121 @@ const initialFormState: ContactFormState = {
   website: "",
 };
 
-function buildContactErrorMessage(error: unknown): string {
-  if (error instanceof ApiError) {
-    if (error.status === 400) {
-      return "Please review the form fields and try again.";
+function extractApiErrorMessage(error: ApiError): string | null {
+  const { details } = error;
+
+  if (typeof details === "string") {
+    return details;
+  }
+
+  if (details && typeof details === "object") {
+    if ("message" in details && typeof details.message === "string") {
+      return details.message;
     }
 
-    if (error.status === 429) {
-      return "Too many contact attempts were received. Please wait a moment and try again.";
-    }
-
-    if (error.status === 503) {
-      return "The contact service is temporarily unavailable. Please try again shortly.";
+    if ("detail" in details && typeof details.detail === "string") {
+      return details.detail;
     }
   }
 
-  return "The message could not be sent right now. Please try again.";
+  return null;
+}
+
+function isCaptchaRelatedError(error: ApiError): boolean {
+  const apiMessage = extractApiErrorMessage(error)?.toLowerCase();
+
+  if (!apiMessage) {
+    return false;
+  }
+
+  return (
+    apiMessage.includes("captcha") ||
+    apiMessage.includes("turnstile") ||
+    apiMessage.includes("token")
+  );
+}
+
+function buildContactErrorState(
+  error: unknown,
+  turnstileEnabled: boolean,
+  hadCaptchaToken: boolean
+): {
+  message: string;
+  shouldResetTurnstile: boolean;
+} {
+  if (error instanceof ApiError) {
+    if (error.status === 400) {
+      if (!hadCaptchaToken && turnstileEnabled) {
+        return {
+          message:
+            "Please complete the security check before sending your message.",
+          shouldResetTurnstile: false,
+        };
+      }
+
+      if (turnstileEnabled && isCaptchaRelatedError(error)) {
+        return {
+          message:
+            "The security check expired or could not be verified. Please complete it again and resubmit.",
+          shouldResetTurnstile: true,
+        };
+      }
+
+      return {
+        message: "Please review the form fields and try again.",
+        shouldResetTurnstile: false,
+      };
+    }
+
+    if (error.status === 429) {
+      return {
+        message:
+          "Too many contact attempts were received. Please wait a moment and try again.",
+        shouldResetTurnstile: false,
+      };
+    }
+
+    if (error.status === 503) {
+      return {
+        message:
+          "The contact service is temporarily unavailable. Please try again shortly.",
+        shouldResetTurnstile: false,
+      };
+    }
+  }
+
+  return {
+    message: "The message could not be sent right now. Please try again.",
+    shouldResetTurnstile: false,
+  };
 }
 
 export function ContactPage() {
+  const turnstileEnabled = isTurnstileEnabled();
+  const turnstileSiteKey = turnstileEnabled
+    ? getPublicTurnstileSiteKey()
+    : null;
+  const turnstileRef = useRef<TurnstileWidgetHandle | null>(null);
   const [formState, setFormState] =
     useState<ContactFormState>(initialFormState);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [feedback, setFeedback] = useState<SubmissionFeedback>(null);
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setIsSubmitting(true);
     setFeedback(null);
 
-    const captchaToken = await getOptionalContactCaptchaToken();
+    if (turnstileEnabled && !captchaToken) {
+      setFeedback({
+        tone: "error",
+        message:
+          "Please complete the security check before sending your message.",
+      });
+      setIsSubmitting(false);
+      return;
+    }
 
     try {
       const response = await submitContactRequest({
@@ -90,14 +179,27 @@ export function ContactPage() {
       });
 
       setFormState(initialFormState);
+      setCaptchaToken(null);
+      turnstileRef.current?.reset();
       setFeedback({
         tone: "success",
         message: response.message,
       });
     } catch (error) {
+      const errorState = buildContactErrorState(
+        error,
+        turnstileEnabled,
+        Boolean(captchaToken)
+      );
+
+      if (errorState.shouldResetTurnstile) {
+        setCaptchaToken(null);
+        turnstileRef.current?.reset();
+      }
+
       setFeedback({
         tone: "error",
-        message: buildContactErrorMessage(error),
+        message: errorState.message,
       });
     } finally {
       setIsSubmitting(false);
@@ -280,6 +382,41 @@ export function ContactPage() {
                   className="lg:min-h-24"
                 />
               </div>
+
+              {turnstileEnabled && turnstileSiteKey ? (
+                <div>
+                  <label className="mb-2 block text-sm font-medium text-foreground/88 lg:mb-1.5">
+                    Security check
+                  </label>
+                  <TurnstileWidget
+                    ref={turnstileRef}
+                    siteKey={turnstileSiteKey}
+                    onVerify={(token) => {
+                      setCaptchaToken(token);
+                    }}
+                    onExpire={() => {
+                      setCaptchaToken(null);
+                      setFeedback({
+                        tone: "error",
+                        message:
+                          "The security check expired. Please complete it again before sending your message.",
+                      });
+                    }}
+                    onError={() => {
+                      setCaptchaToken(null);
+                      setFeedback({
+                        tone: "error",
+                        message:
+                          "The security check could not be loaded. Refresh the page and try again.",
+                      });
+                    }}
+                  />
+                  <p className="mt-2 text-xs text-foreground/60">
+                    Please complete the security check before sending your
+                    message.
+                  </p>
+                </div>
+              ) : null}
 
               <div className="hidden" aria-hidden="true">
                 <label htmlFor="website">Website</label>

@@ -203,10 +203,14 @@ Defined in `.env.example`:
 
 - `NEXT_PUBLIC_SITE_URL` (example: `http://localhost:3000`)
 - `NEXT_PUBLIC_API_BASE_URL` (example: `http://localhost:4000`)
+- `NEXT_PUBLIC_TURNSTILE_ENABLED` (`true` or `false`)
+- `NEXT_PUBLIC_TURNSTILE_SITE_KEY` (Cloudflare Turnstile site key)
 
 Notes:
 
 - `NEXT_PUBLIC_API_BASE_URL` is the single supported backend base URL variable for the current implementation.
+- Turnstile is enabled on the contact form only when `NEXT_PUBLIC_TURNSTILE_ENABLED=true`.
+- When Turnstile is enabled, `NEXT_PUBLIC_TURNSTILE_SITE_KEY` becomes required for the frontend build/runtime.
 - The frontend never hardcodes backend domains.
 
 These are used for metadata, sitemap/robots generation, and the typed API client.
@@ -224,7 +228,7 @@ The public contact form sends `POST /contact` with this payload shape:
   "email": "john@example.com",
   "message": "Hello",
   "website": "",
-  "captchaToken": "optional"
+  "captchaToken": "required when Turnstile is enabled"
 }
 ```
 
@@ -232,14 +236,26 @@ Important behavior:
 
 - `subject` is required by both backend and frontend.
 - `website` is a hidden honeypot field and is always sent.
-- `captchaToken` is optional and currently not required because backend Turnstile enforcement is disabled.
+- `captchaToken` is populated from the Cloudflare Turnstile widget when Turnstile is enabled.
 - Honeypot submissions and some duplicate detections may return a silent `200` success response.
 
 Frontend error handling maps backend responses as follows:
 
-- `400`: validation feedback
+- `400`: validation or captcha feedback
 - `429`: rate-limit / anti-spam feedback
 - `503`: temporary service-unavailable feedback
+
+### Turnstile Wiring
+
+The contact form integrates Cloudflare Turnstile in explicit-render mode and sends the resolved token as `captchaToken` to `POST /contact`.
+
+Frontend behavior:
+
+- The widget is rendered inside the existing contact form UI.
+- The token is stored in client state after a successful Turnstile challenge.
+- If the token expires or the widget errors, the token is cleared from form state.
+- If Turnstile is enabled and no valid token is available, the form submission is blocked on the client.
+- If the backend rejects the captcha, the widget is reset and the user is asked to complete the security check again.
 
 ### Admin Route Usage
 
@@ -273,7 +289,9 @@ Use this checklist after configuring `NEXT_PUBLIC_API_BASE_URL`:
   - Verify `subject` is required.
   - Verify `website` honeypot is still present in the DOM and sent in the payload.
   - Confirm `400`, `429`, and `503` responses show appropriate error states.
-  - Confirm the form remains captcha-ready without blocking submission when no token is present.
+  - When Turnstile is enabled, confirm submit without solving the widget is blocked with a captcha message.
+  - Confirm an expired or reset Turnstile token clears form readiness and requires a new challenge.
+  - Confirm a valid Turnstile solve is sent as `captchaToken`.
 - Admin authentication:
   - Open `/admin` while logged out and confirm redirect to `/admin/login`.
   - Log in with valid credentials and confirm redirect into the dashboard.

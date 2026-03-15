@@ -1,3 +1,9 @@
+## [0.4.0](https://github.com/gastong256/mono256_my-profile-front/compare/v0.3.1...v0.4.0) (2026-03-15)
+
+### Features
+
+- add responsive system toasts for contact feedback ([d2a6739](https://github.com/gastong256/mono256_my-profile-front/commit/d2a6739abfc681b1b46b11b720f096f7bcc0f7f6))
+
 ## [0.3.1](https://github.com/gastong256/mono256_my-profile-front/compare/v0.3.0...v0.3.1) (2026-03-15)
 
 ### Bug Fixes

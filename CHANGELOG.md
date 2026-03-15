@@ -1,3 +1,9 @@
+## [0.4.1](https://github.com/gastong256/mono256_my-profile-front/compare/v0.4.0...v0.4.1) (2026-03-15)
+
+### Bug Fixes
+
+- trigger vercel production deploys only after releases ([155febd](https://github.com/gastong256/mono256_my-profile-front/commit/155febd2d38ce48756a05b47fd740775af1fab68))
+
 ## [0.4.0](https://github.com/gastong256/mono256_my-profile-front/compare/v0.3.1...v0.4.0) (2026-03-15)
 
 ### Features

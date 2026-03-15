@@ -383,41 +383,6 @@ export function ContactPage() {
                 />
               </div>
 
-              {turnstileEnabled && turnstileSiteKey ? (
-                <div>
-                  <label className="mb-2 block text-sm font-medium text-foreground/88 lg:mb-1.5">
-                    Security check
-                  </label>
-                  <TurnstileWidget
-                    ref={turnstileRef}
-                    siteKey={turnstileSiteKey}
-                    onVerify={(token) => {
-                      setCaptchaToken(token);
-                    }}
-                    onExpire={() => {
-                      setCaptchaToken(null);
-                      setFeedback({
-                        tone: "error",
-                        message:
-                          "The security check expired. Please complete it again before sending your message.",
-                      });
-                    }}
-                    onError={() => {
-                      setCaptchaToken(null);
-                      setFeedback({
-                        tone: "error",
-                        message:
-                          "The security check could not be loaded. Refresh the page and try again.",
-                      });
-                    }}
-                  />
-                  <p className="mt-2 text-xs text-foreground/60">
-                    Please complete the security check before sending your
-                    message.
-                  </p>
-                </div>
-              ) : null}
-
               <div className="hidden" aria-hidden="true">
                 <label htmlFor="website">Website</label>
                 <Input
@@ -436,8 +401,8 @@ export function ContactPage() {
               </div>
             </div>
 
-            <div className="mt-3 flex flex-col gap-3 md:flex-row md:items-center md:justify-between lg:mt-2.5">
-              <div aria-live="polite" className="min-h-6">
+            <div className="mt-3 flex flex-col gap-3 lg:mt-2.5 lg:flex-row lg:items-end lg:justify-between">
+              <div aria-live="polite" className="min-h-6 flex-1">
                 {feedback ? (
                   <p
                     className={
@@ -451,13 +416,62 @@ export function ContactPage() {
                 ) : null}
               </div>
 
-              <Button
-                type="submit"
-                className="w-full md:w-auto"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? "Sending..." : "Send message"}
-              </Button>
+              <div className="flex flex-col gap-2 lg:items-end">
+                {turnstileEnabled && turnstileSiteKey ? (
+                  <div className="flex flex-col gap-2 self-start lg:self-auto">
+                    <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
+                      <div className="flex flex-col gap-0.5 self-start lg:w-fit">
+                        <TurnstileWidget
+                          ref={turnstileRef}
+                          siteKey={turnstileSiteKey}
+                          size="flexible"
+                          className="w-full"
+                          onVerify={(token) => {
+                            setCaptchaToken(token);
+                          }}
+                          onExpire={() => {
+                            setCaptchaToken(null);
+                            setFeedback({
+                              tone: "error",
+                              message:
+                                "The security check expired. Please complete it again before sending your message.",
+                            });
+                          }}
+                          onError={() => {
+                            setCaptchaToken(null);
+                            setFeedback({
+                              tone: "error",
+                              message:
+                                "The security check could not be loaded. Refresh the page and try again.",
+                            });
+                          }}
+                        />
+
+                        <p className="-mt-0.5 whitespace-nowrap text-xs text-foreground/60">
+                          Complete the security check and then send your
+                          message.
+                        </p>
+                      </div>
+
+                      <Button
+                        type="submit"
+                        className="w-full lg:w-auto"
+                        disabled={isSubmitting}
+                      >
+                        {isSubmitting ? "Sending..." : "Send message"}
+                      </Button>
+                    </div>
+                  </div>
+                ) : (
+                  <Button
+                    type="submit"
+                    className="w-full lg:w-auto"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? "Sending..." : "Send message"}
+                  </Button>
+                )}
+              </div>
             </div>
           </form>
         </div>

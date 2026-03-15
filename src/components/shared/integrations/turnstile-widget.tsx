@@ -109,6 +109,7 @@ export type TurnstileWidgetHandle = {
 type TurnstileWidgetProps = {
   siteKey: string;
   className?: string;
+  size?: "normal" | "compact" | "flexible";
   onVerify: (token: string) => void;
   onExpire: () => void;
   onError: (errorCode?: string) => void;
@@ -118,7 +119,7 @@ export const TurnstileWidget = forwardRef<
   TurnstileWidgetHandle,
   TurnstileWidgetProps
 >(function TurnstileWidget(
-  { siteKey, className, onVerify, onExpire, onError },
+  { siteKey, className, size = "flexible", onVerify, onExpire, onError },
   ref
 ) {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -170,7 +171,7 @@ export const TurnstileWidget = forwardRef<
         widgetIdRef.current = turnstile.render(containerRef.current, {
           sitekey: siteKey,
           theme: "auto",
-          size: "flexible",
+          size,
           callback(token) {
             verifyRef.current(token);
           },
@@ -208,12 +209,12 @@ export const TurnstileWidget = forwardRef<
         widgetIdRef.current = null;
       }
     };
-  }, [siteKey]);
+  }, [siteKey, size]);
 
   return (
     <div
       className={cn(
-        "min-h-[78px] rounded-md border border-border/70 bg-background/20 p-3",
+        size === "compact" && "inline-flex items-center",
         className
       )}
     >

@@ -1,3 +1,9 @@
+## [0.3.1](https://github.com/gastong256/mono256_my-profile-front/compare/v0.3.0...v0.3.1) (2026-03-15)
+
+### Bug Fixes
+
+- refine turnstile layout and integration polish ([94d0308](https://github.com/gastong256/mono256_my-profile-front/commit/94d03089ce903e05a2f54e834698776e6c036671))
+
 ## [0.3.0](https://github.com/gastong256/mono256_my-profile-front/compare/v0.2.3...v0.3.0) (2026-03-15)
 
 ### Features

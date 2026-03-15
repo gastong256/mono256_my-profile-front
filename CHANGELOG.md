@@ -1,3 +1,9 @@
+## [0.3.0](https://github.com/gastong256/mono256_my-profile-front/compare/v0.2.3...v0.3.0) (2026-03-15)
+
+### Features
+
+- add cloudflare turnstile support to the contact form ([7d426c1](https://github.com/gastong256/mono256_my-profile-front/commit/7d426c116e0b9f483e7e40b44b0fa26a24a11e5a))
+
 ## [0.2.3](https://github.com/gastong256/mono256_my-profile-front/compare/v0.2.2...v0.2.3) (2026-03-14)
 
 ### Bug Fixes

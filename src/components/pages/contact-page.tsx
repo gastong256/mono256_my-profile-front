@@ -18,12 +18,14 @@ import {
   TurnstileWidget,
   type TurnstileWidgetHandle,
 } from "@/components/shared/integrations/turnstile-widget";
+import { useSystemToast } from "@/components/shared/system/system-toast-provider";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { submitContactRequest } from "@/lib/api/contact";
 import { ApiError } from "@/lib/api/client";
 import { getPublicTurnstileSiteKey, isTurnstileEnabled } from "@/lib/env";
+import type { SystemToastTone } from "@/components/shared/system/system-toast-provider";
 
 type ContactFormState = {
   name: string;
@@ -33,16 +35,9 @@ type ContactFormState = {
   website: string;
 };
 
-type SubmissionFeedback =
-  | {
-      tone: "success";
-      message: string;
-    }
-  | {
-      tone: "error";
-      message: string;
-    }
-  | null;
+type InlineSubmissionFeedback = {
+  message: string;
+} | null;
 
 const initialFormState: ContactFormState = {
   name: "",
@@ -91,6 +86,11 @@ function buildContactErrorState(
   turnstileEnabled: boolean,
   hadCaptchaToken: boolean
 ): {
+  surface: "inline" | "toast";
+  toastDedupeKey?: string;
+  toastTone?: SystemToastTone;
+  toastTitle?: string;
+  toastPersist?: boolean;
   message: string;
   shouldResetTurnstile: boolean;
 } {
@@ -98,6 +98,7 @@ function buildContactErrorState(
     if (error.status === 400) {
       if (!hadCaptchaToken && turnstileEnabled) {
         return {
+          surface: "inline",
           message:
             "Please complete the security check before sending your message.",
           shouldResetTurnstile: false,
@@ -106,6 +107,7 @@ function buildContactErrorState(
 
       if (turnstileEnabled && isCaptchaRelatedError(error)) {
         return {
+          surface: "inline",
           message:
             "The security check expired or could not be verified. Please complete it again and resubmit.",
           shouldResetTurnstile: true,
@@ -113,6 +115,7 @@ function buildContactErrorState(
       }
 
       return {
+        surface: "inline",
         message: "Please review the form fields and try again.",
         shouldResetTurnstile: false,
       };
@@ -120,6 +123,10 @@ function buildContactErrorState(
 
     if (error.status === 429) {
       return {
+        surface: "toast",
+        toastDedupeKey: "contact-rate-limit",
+        toastTone: "warning",
+        toastTitle: "Rate limit reached",
         message:
           "Too many contact attempts were received. Please wait a moment and try again.",
         shouldResetTurnstile: false,
@@ -128,6 +135,11 @@ function buildContactErrorState(
 
     if (error.status === 503) {
       return {
+        surface: "toast",
+        toastDedupeKey: "contact-service-unavailable",
+        toastTone: "error",
+        toastTitle: "Contact service unavailable",
+        toastPersist: true,
         message:
           "The contact service is temporarily unavailable. Please try again shortly.",
         shouldResetTurnstile: false,
@@ -136,6 +148,11 @@ function buildContactErrorState(
   }
 
   return {
+    surface: "toast",
+    toastDedupeKey: "contact-delivery-failed",
+    toastTone: "error",
+    toastTitle: "Message delivery failed",
+    toastPersist: true,
     message: "The message could not be sent right now. Please try again.",
     shouldResetTurnstile: false,
   };
@@ -146,11 +163,12 @@ export function ContactPage() {
   const turnstileSiteKey = turnstileEnabled
     ? getPublicTurnstileSiteKey()
     : null;
+  const { showToast } = useSystemToast();
   const turnstileRef = useRef<TurnstileWidgetHandle | null>(null);
   const [formState, setFormState] =
     useState<ContactFormState>(initialFormState);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [feedback, setFeedback] = useState<SubmissionFeedback>(null);
+  const [feedback, setFeedback] = useState<InlineSubmissionFeedback>(null);
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -160,7 +178,6 @@ export function ContactPage() {
 
     if (turnstileEnabled && !captchaToken) {
       setFeedback({
-        tone: "error",
         message:
           "Please complete the security check before sending your message.",
       });
@@ -181,8 +198,10 @@ export function ContactPage() {
       setFormState(initialFormState);
       setCaptchaToken(null);
       turnstileRef.current?.reset();
-      setFeedback({
+      showToast({
+        dedupeKey: "contact-submit-success",
         tone: "success",
+        title: "Message sent",
         message: response.message,
       });
     } catch (error) {
@@ -197,10 +216,20 @@ export function ContactPage() {
         turnstileRef.current?.reset();
       }
 
-      setFeedback({
-        tone: "error",
-        message: errorState.message,
-      });
+      if (errorState.surface === "toast") {
+        showToast({
+          dedupeKey: errorState.toastDedupeKey,
+          tone: errorState.toastTone ?? "error",
+          title: errorState.toastTitle,
+          message: errorState.message,
+          persist: errorState.toastPersist,
+        });
+        setFeedback(null);
+      } else {
+        setFeedback({
+          message: errorState.message,
+        });
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -404,13 +433,7 @@ export function ContactPage() {
             <div className="mt-3 flex flex-col gap-3 lg:mt-2.5 lg:flex-row lg:items-end lg:justify-between">
               <div aria-live="polite" className="min-h-6 flex-1">
                 {feedback ? (
-                  <p
-                    className={
-                      feedback.tone === "success"
-                        ? "text-sm font-medium text-success"
-                        : "text-sm font-medium text-[#f0c674]"
-                    }
-                  >
+                  <p className="text-sm font-medium text-[#f0c674]">
                     {feedback.message}
                   </p>
                 ) : null}
@@ -428,21 +451,24 @@ export function ContactPage() {
                           className="w-full"
                           onVerify={(token) => {
                             setCaptchaToken(token);
+                            setFeedback(null);
                           }}
                           onExpire={() => {
                             setCaptchaToken(null);
                             setFeedback({
-                              tone: "error",
                               message:
                                 "The security check expired. Please complete it again before sending your message.",
                             });
                           }}
                           onError={() => {
                             setCaptchaToken(null);
-                            setFeedback({
+                            showToast({
+                              dedupeKey: "turnstile-unavailable",
                               tone: "error",
+                              title: "Security check unavailable",
                               message:
                                 "The security check could not be loaded. Refresh the page and try again.",
+                              persist: true,
                             });
                           }}
                         />

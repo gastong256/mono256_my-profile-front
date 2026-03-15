@@ -17,16 +17,17 @@ import {
   shortcuts,
   ShortcutIcon,
 } from "./header-shortcuts-core";
+import { useHeaderUi } from "./header-ui-provider";
 
 export function HeaderShortcutsMenu() {
   const pathname = usePathname();
   const activeView = getActiveView(pathname);
-  const [open, setOpen] = useState(false);
+  const { isMobileMenuOpen: open, setMobileMenuOpen: setOpen } = useHeaderUi();
   const rootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setOpen(false);
-  }, [pathname]);
+  }, [pathname, setOpen]);
 
   useEffect(() => {
     if (!open) {
@@ -52,7 +53,7 @@ export function HeaderShortcutsMenu() {
       document.removeEventListener("mousedown", handlePointerDown);
       document.removeEventListener("keydown", handleEscape);
     };
-  }, [open]);
+  }, [open, setOpen]);
 
   return (
     <div ref={rootRef} className="relative">

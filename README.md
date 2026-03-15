@@ -315,6 +315,7 @@ What it automates:
 - Updates `package.json` with the released version.
 - Updates `CHANGELOG.md`.
 - Commits the release artifacts back to `main`.
+- Triggers the Vercel production deploy only when a new release tag is published.
 
 Release rules follow Conventional Commits:
 
@@ -328,6 +329,7 @@ To publish a new release:
 2. GitHub Actions runs `CI`.
 3. If `CI` succeeds, the release workflow runs `semantic-release`.
 4. The workflow calculates the next version and publishes the release.
+5. If a new release tag was created, the workflow calls the Vercel Deploy Hook for `main`.
 
 Optional local helpers:
 
@@ -340,6 +342,8 @@ Notes:
 
 - `release:dry-run` is useful for checking what `semantic-release` would do without publishing.
 - The `version:*` scripts are now only manual fallbacks and are no longer part of the normal release path.
+- `vercel.json` disables automatic Git-based production deployments from `main`.
+- Configure `VERCEL_DEPLOY_HOOK_URL` in GitHub Actions secrets so production deploys happen only after a successful release.
 
 ## 11. Future Roadmap Summary
 

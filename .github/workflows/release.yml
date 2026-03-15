@@ -34,7 +34,36 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Record tags before release
+        run: git tag --sort=version:refname > /tmp/tags-before-release.txt
+
       - name: Run semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: pnpm exec semantic-release
+
+      - name: Detect published release tags
+        id: release_tags
+        run: |
+          git tag --sort=version:refname > /tmp/tags-after-release.txt
+          new_tags="$(comm -13 /tmp/tags-before-release.txt /tmp/tags-after-release.txt | paste -sd ',' -)"
+
+          if [ -n "$new_tags" ]; then
+            echo "published=true" >> "$GITHUB_OUTPUT"
+            echo "tags=$new_tags" >> "$GITHUB_OUTPUT"
+          else
+            echo "published=false" >> "$GITHUB_OUTPUT"
+            echo "tags=" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Trigger Vercel production deploy
+        if: steps.release_tags.outputs.published == 'true'
+        env:
+          VERCEL_DEPLOY_HOOK_URL: ${{ secrets.VERCEL_DEPLOY_HOOK_URL }}
+        run: |
+          if [ -z "$VERCEL_DEPLOY_HOOK_URL" ]; then
+            echo "Missing VERCEL_DEPLOY_HOOK_URL secret."
+            exit 1
+          fi
+
+          curl --fail --silent --show-error --request POST "$VERCEL_DEPLOY_HOOK_URL"
